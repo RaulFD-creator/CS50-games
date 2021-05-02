@@ -61,12 +61,17 @@ function Board:calculateMatches()
 
     -- how many of the same color blocks in a row we've found
     local matchNum = 1
+    local shiny_file = {}
 
     -- horizontal matches first
     for y = 1, 8 do
         local colorToMatch = self.tiles[y][1].color
-
+        if self.tiles[y][1].shiny then
+            table.insert(x_file, self.tiles[y][1])
+        end
+        
         matchNum = 1
+        local flag_shininess = true
         
         -- every horizontal tile
         for x = 2, 8 do
@@ -74,6 +79,9 @@ function Board:calculateMatches()
             -- if this is the same color as the one we're trying to match...
             if self.tiles[y][x].color == colorToMatch then
                 matchNum = matchNum + 1
+                if self.tiles[y][x].shiny then
+                    table.insert(shiny_file, self.tiles[y][x])
+                end
             else
                 
                 -- set this as the new color we want to watch for
@@ -82,19 +90,32 @@ function Board:calculateMatches()
                 -- if we have a match of 3 or more up to now, add it to our matches table
                 if matchNum >= 3 then
                     local match = {}
+                    for k, shiny_tile in pairs(shiny_file) do
+                        flag_shininess = false
+                        for y_element = 1, 8 do
+                            if y_element == shiny_tile.gridY then
+                                for x_element = 1, 8 do
+                                    table.insert(match, self.tiles[y_element][x_element])
+                                end
+                            end
+                        end
+                    end 
 
-                    -- go backwards from here by matchNum
-                    for x2 = x - 1, x - matchNum, -1 do
-                        
-                        -- add each tile to the match that's in that match
-                        table.insert(match, self.tiles[y][x2])
+                    if flag_shininess then
+                        -- go backwards from here by matchNum
+                        for x2 = x - 1, x - matchNum, -1 do
+                            -- add each tile to the match that's in that match
+                            table.insert(match, self.tiles[y][x2])
+                        end
                     end
 
                     -- add this match to our total matches table
                     table.insert(matches, match)
                 end
 
+                flag_shininess = true
                 matchNum = 1
+                x_file = {}
 
                 -- don't need to check last two if they won't be in a match
                 if x >= 7 then
@@ -106,10 +127,21 @@ function Board:calculateMatches()
         -- account for the last row ending with a match
         if matchNum >= 3 then
             local match = {}
-            
-            -- go backwards from end of last row by matchNum
-            for x = 8, 8 - matchNum + 1, -1 do
+            for k, shiny_tile in pairs(shiny_file) do
+                flag_shininess = false
+                for y_element = 1, 8 do
+                    if y_element == shiny_tile.gridY then
+                        for x_element = 1, 8 do
+                            table.insert(match, self.tiles[y_element][x_element])
+                        end
+                    end
+                end
+            end 
+            if flag_shininess then
+                -- go backwards from end of last row by matchNum
+                for x = 8, 8 - matchNum + 1, -1 do
                 table.insert(match, self.tiles[y][x])
+                end
             end
 
             table.insert(matches, match)

@@ -17,22 +17,23 @@ function Board:init(x, y, level)
     self.x = x
     self.y = y
     self.matches = {}
-
+    self.level = level
     self:initializeTiles()
 end
 
 function Board:initializeTiles()
     self.tiles = {}
-
     for tileY = 1, 8 do
-        
-        -- empty table that will serve as a new row
         table.insert(self.tiles, {})
-
         for tileX = 1, 8 do
-            
-            -- create a new tile at X,Y with a random color and variety
-            table.insert(self.tiles[tileY], Tile(tileX, tileY, math.random(18), math.random(6)))
+            for temp = 1,6 do
+                if self.level == temp then
+                    -- create a new tile at X,Y with a random color and variety
+                    table.insert(self.tiles[tileY], Tile(tileX, tileY, math.random(18), math.random(temp)))
+                elseif self.level > 6 then
+                    table.insert(self.tiles[tileY], Tile(tileX, tileY, math.random(18), math.random(6)))
+                end
+            end
         end
     end
 

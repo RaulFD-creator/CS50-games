@@ -67,7 +67,7 @@ function Board:calculateMatches()
     for y = 1, 8 do
         local colorToMatch = self.tiles[y][1].color
         if self.tiles[y][1].shiny then
-            table.insert(x_file, self.tiles[y][1])
+            table.insert(shiny_file, self.tiles[y][1])
         end
         
         matchNum = 1
@@ -115,7 +115,7 @@ function Board:calculateMatches()
 
                 flag_shininess = true
                 matchNum = 1
-                x_file = {}
+                shiny_file = {}
 
                 -- don't need to check last two if they won't be in a match
                 if x >= 7 then
@@ -152,6 +152,9 @@ function Board:calculateMatches()
     for x = 1, 8 do
         local colorToMatch = self.tiles[1][x].color
 
+        if self.tiles[1][x].shiny then
+            table.insert(shiny_file, self.tiles[1][x])
+        end
         matchNum = 1
 
         -- every vertical tile

@@ -146,29 +146,61 @@ function PlayState:update(dt)
                 -- swap grid positions of tiles
                 local tempX = self.highlightedTile.gridX
                 local tempY = self.highlightedTile.gridY
-
+                local pastX = self.highlightedTile.gridX
+                local pastY = self.highlightedTile.gridY
+            
                 local newTile = self.board.tiles[y][x]
-
+                local PastTile = self.board.tiles[y][x]
+                
                 self.highlightedTile.gridX = newTile.gridX
                 self.highlightedTile.gridY = newTile.gridY
                 newTile.gridX = tempX
                 newTile.gridY = tempY
-
+                
                 -- swap tiles in the tiles table
                 self.board.tiles[self.highlightedTile.gridY][self.highlightedTile.gridX] =
                     self.highlightedTile
-
+                
                 self.board.tiles[newTile.gridY][newTile.gridX] = newTile
-
+                
                 -- tween coordinates between the two so they swap
                 Timer.tween(0.1, {
                     [self.highlightedTile] = {x = newTile.x, y = newTile.y},
-                    [newTile] = {x = self.highlightedTile.x, y = self.highlightedTile.y}
-                })
+                        [newTile] = {x = self.highlightedTile.x, y = self.highlightedTile.y}
+                    })
+                                
+                    -- once the swap is finished, we can tween falling blocks as needed
+                    :finish(function()
+                        local highlightedTile = self.highlightedTile
+                                        
+                        if not self:calculateMatches() then
                 
-                -- once the swap is finished, we can tween falling blocks as needed
-                :finish(function()
-                    self:calculateMatches()
+                            Timer.after(0.5, function() 
+                                gSounds['error']:play()
+                            -- swap grid positions of tiles
+                            self.highlightedTile = nil
+                            local tempX = highlightedTile.gridX
+                            local tempY = highlightedTile.gridY
+                
+                            highlightedTile.gridX = newTile.gridX
+                            highlightedTile.gridY = newTile.gridY
+                            newTile.gridX = tempX
+                            newTile.gridY = tempY
+                
+                            -- swap tiles in the tiles table
+                            self.board.tiles[highlightedTile.gridY][highlightedTile.gridX] =
+                            highlightedTile
+                
+                            self.board.tiles[newTile.gridY][newTile.gridX] = newTile
+                
+                            -- tween coordinates between the two so they swap
+                            Timer.tween(0.1, {
+                                [highlightedTile] = {x = newTile.x, y = newTile.y},
+                                [newTile] = {x = highlightedTile.x, y = highlightedTile.y}
+                            })
+                            
+                        end)
+                    end
                 end)
             end
         end

@@ -348,3 +348,55 @@ function Board:render()
         end
     end
 end
+
+function Board:PredictMatches()
+    local flag = false
+    for x = 2, 7 do
+        for y = 2, 7 do
+            local tile = self.tiles[y][x]
+            for l = 1, 4 do
+                if l == 1 then
+                    newTileX = x
+                    newTileY = y + 1
+                elseif l == 2 then
+                    newTileX = x + 1
+                    newTileY = y
+                elseif l == 3 then
+                    newTileX = x - 1
+                    newTileY = y 
+                elseif l == 4 then
+                    newTileX = x 
+                    newTileY = y - 1
+                end
+
+                local pastTileX = x
+                local pastTileY = y
+                local tempX = x
+                local tempY = y
+                local board = Class.clone(self)
+                board.pastTile = Tile(x, y, 1, 1)
+                board.newTile = Tile(x, y, 1, 1)
+                board.pastTile.gridX = newTileX
+                board.pastTile.gridY = newTileY
+                board.newTile.gridX = tempX
+                board.newTile.gridY = tempY
+        
+                -- swap tiles in the tiles table
+                board.tiles[board.pastTile.gridY][board.pastTile.gridX] = board.pastTile
+                board.tiles[board.newTile.gridY][board.newTile.gridX] = board.newTile
+                if board:calculateMatches() then
+                    flag = true
+                    return #self.matches > 0 and false or true
+                end
+            
+            end
+        end
+    end
+
+    self.matches = false
+    if flag then
+        return #self.future_matches > 0 and false
+    else
+        return true
+    end
+end

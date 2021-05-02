@@ -28,7 +28,7 @@ function Board:initializeTiles()
         for tileX = 1, 8 do
             for temp = 1,6 do
                 flag_shininess = math.random(100)
-                if flag_shininess < 5 then
+                if flag_shininess < 20 then
                     shininess = true
                 else 
                     shininess = false

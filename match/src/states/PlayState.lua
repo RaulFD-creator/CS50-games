@@ -173,7 +173,7 @@ function PlayState:update(dt)
                     :finish(function()
                         local highlightedTile = self.highlightedTile
                                         
-                        if not self:calculateMatches() then
+                            if not self:calculateMatches() then
                 
                             Timer.after(0.5, function() 
                                 gSounds['error']:play()

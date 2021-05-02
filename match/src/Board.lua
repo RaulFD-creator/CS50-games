@@ -47,7 +47,9 @@ function Board:initializeTiles()
         
         -- recursively initialize if matches were returned so we always have
         -- a matchless board on start
-        self:initializeTiles()
+        while self:PredictMatches() do
+            self:initializeTiles()
+        end
     end
 end
 
@@ -337,7 +339,7 @@ function Board:getFallingTiles()
             end
         end
     end
-
+    self:PredictMatches()
     return tweens
 end
 
@@ -386,7 +388,10 @@ function Board:PredictMatches()
                 board.tiles[board.newTile.gridY][board.newTile.gridX] = board.newTile
                 if board:calculateMatches() then
                     flag = true
-                    return #self.matches > 0 and false or true
+                    if flag == false then
+                        self:initializeTiles()
+                    end
+--                    return #self.matches > 0 and false or true
                 end
             
             end
@@ -395,7 +400,7 @@ function Board:PredictMatches()
 
     self.matches = false
     if flag then
-        return #self.future_matches > 0 and false
+        return false
     else
         return true
     end

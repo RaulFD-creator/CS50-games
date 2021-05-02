@@ -27,11 +27,17 @@ function Board:initializeTiles()
         table.insert(self.tiles, {})
         for tileX = 1, 8 do
             for temp = 1,6 do
+                flag_shininess = math.random(100)
+                if flag_shininess < 5 then
+                    shininess = true
+                else 
+                    shininess = false
+                end
                 if self.level == temp then
                     -- create a new tile at X,Y with a random color and variety
-                    table.insert(self.tiles[tileY], Tile(tileX, tileY, math.random(18), math.random(temp)))
+                    table.insert(self.tiles[tileY], Tile(tileX, tileY, math.random(18), math.random(temp), shininess))
                 elseif self.level > 6 then
-                    table.insert(self.tiles[tileY], Tile(tileX, tileY, math.random(18), math.random(6)))
+                    table.insert(self.tiles[tileY], Tile(tileX, tileY, math.random(18), math.random(6), shininess))
                 end
             end
         end
@@ -241,12 +247,18 @@ function Board:getFallingTiles()
             if not tile then
 
                 for temp = 1,6 do
+                    flag_shininess = math.random(100)
+                    if flag_shininess < 5 then
+                        shininess = true
+                    else 
+                        shininess = false
+                    end
                     -- new tile with random color and variety
                     if self.level == temp then
                         -- create a new tile at X,Y with a random color and variety
-                        tile = Tile(x, y, math.random(18), math.random(temp))
+                        tile = Tile(x, y, math.random(18), math.random(temp), shininess)
                     elseif self.level > 6 then
-                        tile = Tile(x, y, math.random(18), math.random(6))
+                        tile = Tile(x, y, math.random(18), math.random(6), shininess)
                     end
                 end
             

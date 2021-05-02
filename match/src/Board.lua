@@ -166,15 +166,32 @@ function Board:calculateMatches()
 
                 if matchNum >= 3 then
                     local match = {}
+                    for k, shiny_tile in pairs(shiny_file) do
+                        flag_shininess = false
+                        for x_element = 1, 8 do
+                            if x_element == shiny_tile.gridX then
+                                for y_element = 1, 8 do
+                                    table.insert(match, self.tiles[y_element][x_element])
+                                end
+                            end
+                        end
+                    end 
 
-                    for y2 = y - 1, y - matchNum, -1 do
-                        table.insert(match, self.tiles[y2][x])
+                    if flag_shininess then
+                        -- go backwards from here by matchNum
+                        for y2 = 8, y - matchNum + 1, -1 do
+                            -- add each tile to the match that's in that match
+                            table.insert(match, self.tiles[y2][x])
+                        end
                     end
 
+                    -- add this match to our total matches table
                     table.insert(matches, match)
                 end
 
+                flag_shininess = true
                 matchNum = 1
+                shiny_file = {}
 
                 -- don't need to check last two if they won't be in a match
                 if y >= 7 then
@@ -186,10 +203,23 @@ function Board:calculateMatches()
         -- account for the last column ending with a match
         if matchNum >= 3 then
             local match = {}
-            
-            -- go backwards from end of last row by matchNum
-            for y = 8, 8 - matchNum + 1, -1 do
-                table.insert(match, self.tiles[y][x])
+            for k, shiny_tile in pairs(shiny_file) do
+                flag_shininess = false
+                for x_element = 1, 8 do
+                    if x_element == shiny_tile.gridX then
+                        for y_element = 1, 8 do
+                            table.insert(match, self.tiles[y_element][x_element])
+                        end
+                    end
+                end
+            end 
+
+            if flag_shininess then
+                -- go backwards from here by matchNum
+                for y2 = 8, 8 - matchNum + 1, -1 do
+                    -- add each tile to the match that's in that match
+                    table.insert(match, self.tiles[y2][x])
+                end
             end
 
             table.insert(matches, match)

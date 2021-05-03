@@ -39,9 +39,21 @@ function LevelMaker.generate(width, height)
 
         -- chance to just be emptiness
         if math.random(7) == 1 then
-            for y = 7, height do
-                table.insert(tiles[y],
-                    Tile(x, y, tileID, nil, tileset, topperset))
+            if x == 1 then 
+                for y = 7, height do
+                    table.insert(tiles[y],
+                            Tile(x, y, TILE_ID_GROUND, nil, tileset, topperset))
+                end
+            else
+                for y = 7, height do
+                    if y == 4 then 
+                        table.insert(tiles[y],
+                            Tile(x, y, tileID, topper, tileset, topperset))
+                    else
+                        table.insert(tiles[y],
+                            Tile(x, y, tileID, nil, tileset, topperset))    
+                    end
+                end
             end
         else
             tileID = TILE_ID_GROUND

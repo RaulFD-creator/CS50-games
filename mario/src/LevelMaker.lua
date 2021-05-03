@@ -134,7 +134,6 @@ function LevelMaker.generate(width, height)
 
                         onConsume = function(block)
                             gSounds['pickup']:play()
-                        end
                     }
                     table.insert(objects, block)
                     flag_block = false

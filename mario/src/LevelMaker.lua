@@ -114,10 +114,8 @@ function LevelMaker.generate(width, height)
             -- chance to spawn a block
             if math.random(10) == 1 then
                 if flag_block then
-                    table.insert(objects,
-
                     -- jump block
-                    GameObject {
+                    block = GameObject {
                         texture = 'locks_and_keys',
                         x = (x - 1) * TILE_SIZE,
                         y = (blockHeight - 1) * TILE_SIZE,
@@ -127,15 +125,24 @@ function LevelMaker.generate(width, height)
                         -- make it a random variant
                         frame = blockset,
                         collidable = true,
+                        consumable = false,
                         hit = false,
-                        solid = true
-                    })
+                        solid = true,
+                        onCollide = function(block)
+                            gSounds['empty-block']:play()
+                        end,
+
+                        onConsume = function(block)
+                            gSounds['pickup']:play()
+                        end
+                    }
+                    table.insert(objects, block)
                     flag_block = false
 
                 elseif flag_key then
                     table.insert(objects,
 
-                    -- jump block
+                    --  key
                     GameObject {
                         texture = 'locks_and_keys',
                         x = (x - 1) * TILE_SIZE,
@@ -147,7 +154,15 @@ function LevelMaker.generate(width, height)
                         frame = keyset,
                         collidable = true,
                         hit = false,
-                        solid = true
+                        solid = false, 
+                        consumable = true,
+                        collidable = true,
+                        
+                        onConsume = function(player, object)
+                            gSounds['pickup']:play()
+                            block.consumable = true
+                            block.solid = false
+                        end
                     })
                     flag_key = false
 

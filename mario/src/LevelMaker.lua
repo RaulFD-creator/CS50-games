@@ -50,7 +50,7 @@ function LevelMaker.generate(width, height)
                 end
             else
                 for y = 7, height do
-                    if y == 4 then 
+                    if y == 3 then 
                         table.insert(tiles[y],
                             Tile(x, y, tileID, topper, tileset, topperset))
                     else

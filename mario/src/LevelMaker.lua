@@ -25,6 +25,7 @@ function LevelMaker.generate(width, height)
     local blockset = 4 + keyset
     local flag_block = true
     local flag_key = true
+    count = 0
 
     -- insert blank tables into tiles for later access
     for x = 1, height do
@@ -157,7 +158,7 @@ function LevelMaker.generate(width, height)
                     table.insert(objects, block)
                     flag_block = false
 
-                elseif flag_key then
+                elseif flag_key and count == 3 then
                     table.insert(objects,
 
                     --  key
@@ -185,6 +186,7 @@ function LevelMaker.generate(width, height)
                     flag_key = false
 
                 else
+                    count = count + 1
                     table.insert(objects,
 
                         -- jump block

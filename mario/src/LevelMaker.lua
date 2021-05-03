@@ -133,8 +133,27 @@ function LevelMaker.generate(width, height)
                         end,
 
                         onConsume = function(block)
+                            table.insert(objects,
+                            GameObject {
+                                texture = 'flag_poles',
+                                x = (1) * TILE_SIZE,
+                                y = (3) * TILE_SIZE,
+                                width = 16, 
+                                height = 64,
+                                frame = 2
+                            })
+                            table.insert(objects,
+                            GameObject{
+                                texture = 'flags',
+                                x = 2 * TILE_SIZE - 6,
+                                y = 3 * TILE_SIZE,
+                                width = 16,
+                                height = 16,
+                                frame = 7
+                            })
+
                             gSounds['pickup']:play()
-                    }
+                        end}
                     table.insert(objects, block)
                     flag_block = false
 

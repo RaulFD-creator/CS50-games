@@ -149,12 +149,15 @@ function LevelMaker.generate(width, height)
                                 width = 16, 
                                 height = 64,
                                 frame = 2,
-                                collidable = true,
-                                consumable = false,
-                                solid = true,
-                                onCollide = function(object)
+                                collidable = false,
+                                consumable = true,
+                                solid = false,
+                                onConsume = function(object)
                                     gSounds['pickup']:play()
-                                    print('true')
+                                    gStateMachine:change('start', {
+                                    width = width + 5 * TILE_SIZE,
+                                    score = player.score
+                                    })
                                 end
                             })
                             table.insert(objects,

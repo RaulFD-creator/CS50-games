@@ -11,8 +11,13 @@
 StartState = Class{__includes = BaseState}
 
 function StartState:init()
-    self.map = LevelMaker.generate(100, 10)
     self.background = math.random(3)
+end
+
+function StartState:enter(params)
+    self.width = params.width
+    self.score = score
+    self.map = LevelMaker.generate(self.width, 10)
 end
 
 function StartState:update(dt)

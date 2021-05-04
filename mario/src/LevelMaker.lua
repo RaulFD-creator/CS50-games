@@ -154,7 +154,7 @@ function LevelMaker.generate(width, height)
                                 solid = false,
                                 onConsume = function(player,object)
                                     gSounds['pickup']:play()
-                                    gStateMachine:change('start', {
+                                    gStateMachine:change('play', {
                                     width = width + 5 * TILE_SIZE,
                                     score = player.score
                                     })
@@ -173,7 +173,7 @@ function LevelMaker.generate(width, height)
                                 solid = false,
                                 onConsume = function(player,object)
                                     gSounds['pickup']:play()
-                                    gStateMachine:change('start', {
+                                    gStateMachine:change('play', {
                                     width = width + 5 * TILE_SIZE,
                                     score = player.score
                                     })

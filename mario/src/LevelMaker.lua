@@ -163,7 +163,7 @@ function LevelMaker.generate(width, height)
                             table.insert(objects,
                             GameObject{
                                 texture = 'flags',
-                                x = ((width - 5) * TILE_SIZE) + 8,
+                                x = ((width - 5) * TILE_SIZE) + 9,
                                 y = 3 * TILE_SIZE,
                                 width = 16,
                                 height = 16,
@@ -273,6 +273,10 @@ function LevelMaker.generate(width, height)
 
     local map = TileMap(width, height)
     map.tiles = tiles
+
+    if flag_block or flag_key then
+        LevelMaker.generate(width, height)
+    end
     
     return GameLevel(entities, objects, map)
 end

@@ -149,7 +149,7 @@ function LevelMaker.generate(width, height)
                                 width = 16, 
                                 height = 64,
                                 frame = 2,
-                                collidable = false,
+                                collidable = true,
                                 consumable = true,
                                 solid = false,
                                 onConsume = function(object)

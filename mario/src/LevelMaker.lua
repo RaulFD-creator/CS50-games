@@ -167,7 +167,17 @@ function LevelMaker.generate(width, height)
                                 y = 3 * TILE_SIZE,
                                 width = 16,
                                 height = 16,
-                                frame = 7
+                                frame = 7,                                
+                                collidable = true,
+                                consumable = true,
+                                solid = false,
+                                onConsume = function(player,object)
+                                    gSounds['pickup']:play()
+                                    gStateMachine:change('start', {
+                                    width = width + 5 * TILE_SIZE,
+                                    score = player.score
+                                    })
+                                end
                             })
 
                             gSounds['pickup']:play()

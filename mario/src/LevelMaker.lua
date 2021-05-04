@@ -148,12 +148,19 @@ function LevelMaker.generate(width, height)
                                 y = (3) * TILE_SIZE,
                                 width = 16, 
                                 height = 64,
-                                frame = 2
+                                frame = 2,
+                                collidable = true,
+                                consumable = false,
+                                solid = true,
+                                onCollide = function(object)
+                                    gSounds['pickup']:play()
+                                    print('true')
+                                end
                             })
                             table.insert(objects,
                             GameObject{
                                 texture = 'flags',
-                                x = (width - 5) * TILE_SIZE,
+                                x = ((width - 5) * TILE_SIZE) + 8,
                                 y = 3 * TILE_SIZE,
                                 width = 16,
                                 height = 16,

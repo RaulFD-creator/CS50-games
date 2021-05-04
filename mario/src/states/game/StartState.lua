@@ -18,6 +18,7 @@ function StartState:enter(params)
     self.width = params.width
     self.score = score
     self.map = LevelMaker.generate(self.width, 10)
+    print(self.width)
 end
 
 function StartState:update(dt)

@@ -152,7 +152,7 @@ function LevelMaker.generate(width, height)
                                 collidable = true,
                                 consumable = true,
                                 solid = false,
-                                onConsume = function(object)
+                                onConsume = function(player,object)
                                     gSounds['pickup']:play()
                                     gStateMachine:change('start', {
                                     width = width + 5 * TILE_SIZE,
@@ -273,10 +273,13 @@ function LevelMaker.generate(width, height)
 
     local map = TileMap(width, height)
     map.tiles = tiles
-
-    if flag_block or flag_key then
-        LevelMaker.generate(width, height)
+    for i = 1,30 do
+        if flag_block or flag_key then
+            LevelMaker.generate(width, height)
+        else
+            goto continue
+        end
     end
-    
+    ::continue::
     return GameLevel(entities, objects, map)
 end

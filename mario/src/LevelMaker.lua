@@ -25,7 +25,13 @@ function LevelMaker.generate(width, height)
     local blockset = 4 + keyset
     local flag_block = true
     local flag_key = true
+    block_lock = math.random(5)
+    key = math.random(5)
+    while key == block_lock do
+        key = math.random(5)
+    end
     count = 0
+    count2 = 0
 
     -- insert blank tables into tiles for later access
     for x = 1, height do
@@ -114,7 +120,8 @@ function LevelMaker.generate(width, height)
 
             -- chance to spawn a block
             if math.random(10) == 1 then
-                if flag_block then
+                if flag_block and count == block_lock then
+                    count2 = count2 + 1
                     -- jump block
                     block = GameObject {
                         texture = 'locks_and_keys',
@@ -137,7 +144,7 @@ function LevelMaker.generate(width, height)
                             table.insert(objects,
                             GameObject {
                                 texture = 'flag_poles',
-                                x = WIDTH * TILE_SIZE,
+                                x = (width - 5) * TILE_SIZE,
                                 y = (3) * TILE_SIZE,
                                 width = 16, 
                                 height = 64,
@@ -146,7 +153,7 @@ function LevelMaker.generate(width, height)
                             table.insert(objects,
                             GameObject{
                                 texture = 'flags',
-                                x = WITDH * TILE_SIZE - 6,
+                                x = (width - 5) * TILE_SIZE,
                                 y = 3 * TILE_SIZE,
                                 width = 16,
                                 height = 16,
@@ -158,7 +165,7 @@ function LevelMaker.generate(width, height)
                     table.insert(objects, block)
                     flag_block = false
 
-                elseif flag_key and math.random(10) == 3 then
+                elseif flag_key and count2 == key then
                     table.insert(objects,
 
                     --  key
@@ -184,9 +191,11 @@ function LevelMaker.generate(width, height)
                         end
                     })
                     flag_key = false
+                    count = count + 1
 
                 else
                     count = count + 1
+                    count2 = count2 + 1
                     table.insert(objects,
 
                         -- jump block

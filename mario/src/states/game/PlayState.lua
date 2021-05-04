@@ -42,7 +42,6 @@ function PlayState:enter(params)
     self:spawnEnemies()
 
     self.player:changeState('falling')
-    print(self.width)
 end
 
 function PlayState:update(dt)

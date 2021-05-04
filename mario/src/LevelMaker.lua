@@ -145,7 +145,7 @@ function LevelMaker.generate(width, height)
                             GameObject {
                                 texture = 'flag_poles',
                                 x = (width - 5) * TILE_SIZE,
-                                y = (3) * TILE_SIZE,
+                                y = (blockHeight - 1) * TILE_SIZE,
                                 width = 16, 
                                 height = 64,
                                 frame = 2,
@@ -160,11 +160,12 @@ function LevelMaker.generate(width, height)
                                     })
                                 end
                             })
+
                             table.insert(objects,
                             GameObject{
                                 texture = 'flags',
                                 x = ((width - 5) * TILE_SIZE) + 9,
-                                y = 3 * TILE_SIZE,
+                                y = (blockHeight - 1) * TILE_SIZE,
                                 width = 16,
                                 height = 16,
                                 frame = 7,                                
@@ -283,8 +284,10 @@ function LevelMaker.generate(width, height)
 
     local map = TileMap(width, height)
     map.tiles = tiles
-    for i = 1,30 do
+    for i = 1,10 do
         if flag_block or flag_key then
+            flag_block = true 
+            flag_key = true
             LevelMaker.generate(width, height)
         else
             goto continue

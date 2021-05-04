@@ -137,7 +137,7 @@ function LevelMaker.generate(width, height)
                             table.insert(objects,
                             GameObject {
                                 texture = 'flag_poles',
-                                x = (1) * TILE_SIZE,
+                                x = WIDTH * TILE_SIZE,
                                 y = (3) * TILE_SIZE,
                                 width = 16, 
                                 height = 64,
@@ -146,7 +146,7 @@ function LevelMaker.generate(width, height)
                             table.insert(objects,
                             GameObject{
                                 texture = 'flags',
-                                x = 2 * TILE_SIZE - 6,
+                                x = WITDH * TILE_SIZE - 6,
                                 y = 3 * TILE_SIZE,
                                 width = 16,
                                 height = 16,
@@ -158,7 +158,7 @@ function LevelMaker.generate(width, height)
                     table.insert(objects, block)
                     flag_block = false
 
-                elseif flag_key and count == 3 then
+                elseif flag_key and math.random(10) == 3 then
                     table.insert(objects,
 
                     --  key

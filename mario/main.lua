@@ -39,7 +39,10 @@ function love.load()
         ['start'] = function() return StartState() end,
         ['play'] = function() return PlayState() end
     }
-    gStateMachine:change('start')
+    gStateMachine:change('start',{
+        width = 100,
+        score = 0
+    })
 
     gSounds['music']:setLooping(true)
     gSounds['music']:setVolume(0.5)

@@ -78,7 +78,7 @@ function LevelMaker.generate(width, height)
             end
 
             -- chance to generate a pillar
-            if math.random(8) == 1 and x < width -5 then
+            if math.random(8) == 1 and x < width - 5 then
                 blockHeight = 2
                 
                 -- chance to generate bush on pillar
@@ -104,7 +104,7 @@ function LevelMaker.generate(width, height)
                 tiles[7][x].topper = nil
             
             -- chance to generate bushes
-            elseif math.random(8) == 1 then
+            elseif math.random(8) == 1 and x < width - 5 then
                 table.insert(objects,
                     GameObject {
                         texture = 'bushes',
@@ -119,7 +119,7 @@ function LevelMaker.generate(width, height)
             end
 
             -- chance to spawn a block
-            if math.random(10) == 1 then
+            if math.random(10) == 1 and x < width - 5 then
                 if flag_block and count == block_lock then
                     count2 = count2 + 1
                     -- jump block
@@ -165,7 +165,7 @@ function LevelMaker.generate(width, height)
                             GameObject{
                                 texture = 'flags',
                                 x = ((width - 5) * TILE_SIZE) + 9,
-                                y = (blockHeight - 1) * TILE_SIZE,
+                                y = 3 * TILE_SIZE,
                                 width = 16,
                                 height = 16,
                                 frame = 7,                                

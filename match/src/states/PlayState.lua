@@ -229,7 +229,7 @@ function PlayState:calculateMatches()
         for k, match in pairs(matches) do
             for k, tile in pairs(match) do 
                 self.timer = self.timer + 1
-                self.score = self.score + 50
+                self.score = self.score + 1500
             end
         end
 

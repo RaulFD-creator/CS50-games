@@ -26,19 +26,17 @@ function Board:initializeTiles()
     for tileY = 1, 8 do
         table.insert(self.tiles, {})
         for tileX = 1, 8 do
-            for temp = 1,6 do
-                flag_shininess = math.random(100)
-                if flag_shininess < 20 then
-                    shininess = true
-                else 
-                    shininess = false
-                end
-                if self.level == temp then
-                    -- create a new tile at X,Y with a random color and variety
-                    table.insert(self.tiles[tileY], Tile(tileX, tileY, math.random(18), math.random(temp), shininess))
-                elseif self.level > 6 then
-                    table.insert(self.tiles[tileY], Tile(tileX, tileY, math.random(18), math.random(6), shininess))
-                end
+            if self.level > 6 then
+                table.insert(self.tiles[tileY], Tile(tileX, tileY, math.random(18), math.random(6), shininess))
+            else
+                table.insert(self.tiles[tileY], Tile(tileX, tileY, math.random(18), math.random(self.level), shininess))
+            end
+
+            flag_shininess = math.random(100)
+            if flag_shininess < 20 then
+                shininess = true
+             else 
+                shininess = false
             end
         end
     end

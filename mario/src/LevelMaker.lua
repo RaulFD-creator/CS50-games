@@ -50,10 +50,10 @@ function LevelMaker.generate(width, height)
 
         -- chance to just be emptiness
         if math.random(7) == 1 then
-            if x == 1 then 
+            if x == 1 or x == width - 5 then 
                 for y = 7, height do
                     table.insert(tiles[y],
-                            Tile(x, y, TILE_ID_GROUND, nil, tileset, topperset))
+                            Tile(x, y, TILE_ID_GROUND, y==7 and topper or nil, tileset, topperset))
                 end
             else
                 for y = 7, height do
@@ -78,11 +78,11 @@ function LevelMaker.generate(width, height)
             end
 
             -- chance to generate a pillar
-            if math.random(8) == 1 then
+            if math.random(8) == 1 and x < width -5 then
                 blockHeight = 2
                 
                 -- chance to generate bush on pillar
-                if math.random(8) == 1 then
+                if math.random(8) == 1 and x < width - 5 then
                     table.insert(objects,
                         GameObject {
                             texture = 'bushes',
@@ -145,7 +145,7 @@ function LevelMaker.generate(width, height)
                             GameObject {
                                 texture = 'flag_poles',
                                 x = (width - 5) * TILE_SIZE,
-                                y = (blockHeight - 1) * TILE_SIZE,
+                                y = 3 * TILE_SIZE,
                                 width = 16, 
                                 height = 64,
                                 frame = 2,

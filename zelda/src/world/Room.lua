@@ -11,7 +11,7 @@ Room = Class{}
 function Room:init(player)
     self.width = MAP_WIDTH
     self.height = MAP_HEIGHT
-
+    self.objects = {}
     self.tiles = {}
     self:generateWallsAndFloors()
 
@@ -20,7 +20,6 @@ function Room:init(player)
     self:generateEntities()
 
     -- game objects in the room
-    self.objects = {}
     self:generateObjects()
 
     -- doorways that lead to other dungeon rooms
@@ -88,6 +87,13 @@ function Room:generateObjects()
         math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
                     VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
     )
+    for l = 1, math.random(4) do
+        table.insert(self.objects, GameObject(GAME_OBJECT_DEFS['pot'],
+        math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
+                    VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
+        math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
+                    VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)))
+    end
 
     -- define a function for the switch that will open all doors in the room
     switch.onCollide = function()
@@ -143,6 +149,7 @@ function Room:generateWallsAndFloors()
             table.insert(self.tiles[y], {
                 id = id
             })
+
         end
     end
 end
@@ -196,6 +203,8 @@ function Room:update(dt)
         if self.player:collides(object) then
             if object.type == 'heart' then 
                 object:onCollide(self, k)
+            elseif object.type == 'pot' then
+                object:onCollide(self, dt)
             else
                 object:onCollide()
             end

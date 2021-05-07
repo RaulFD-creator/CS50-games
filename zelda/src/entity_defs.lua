@@ -70,7 +70,8 @@ ENTITY_DEFS = {
                 looping = false,
                 texture = 'character-swing-sword'
             }
-        }
+        },
+        monster = false
     },
     ['skeleton'] = {
         texture = 'entities',
@@ -103,7 +104,8 @@ ENTITY_DEFS = {
             ['idle-up'] = {
                 frames = {47}
             }
-        }
+        }, 
+        monster = true
     },
     ['slime'] = {
         texture = 'entities',
@@ -136,7 +138,8 @@ ENTITY_DEFS = {
             ['idle-up'] = {
                 frames = {86}
             }
-        }
+        },
+        monster = true
     },
     ['bat'] = {
         texture = 'entities',
@@ -173,7 +176,8 @@ ENTITY_DEFS = {
                 frames = {88, 89, 90, 89},
                 interval = 0.2
             }
-        }
+        },
+        monster = true
     },
     ['ghost'] = {
         texture = 'entities',
@@ -206,7 +210,8 @@ ENTITY_DEFS = {
             ['idle-up'] = {
                 frames = {92}
             }
-        }
+        },
+        monster = true
     },
     ['spider'] = {
         texture = 'entities',
@@ -239,6 +244,7 @@ ENTITY_DEFS = {
             ['idle-up'] = {
                 frames = {95}
             }
-        }
+        },
+        monster = true
     }
 }

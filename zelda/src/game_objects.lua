@@ -29,14 +29,24 @@ GAME_OBJECT_DEFS = {
     },
     ['heart'] = {
         type = 'heart',
-        texture = 'heart',
+        texture = 'hearts',
+        defaultState = 'unpressed',
+        states = {
+            ['unpressed'] = {
+                frame = 5
+            }
+        },
         frame = 5,
         width = 16,
         height = 16,
-        solid = false,
-        OnCollide = function(player, object) 
-            gSounds['pickup']:play()
-            player.health = player.health + 1
+        solid = true,  
+
+        onCollide = function(self, room, k)
+            gSounds['pickup']:play() 
+            if room.player.health < 6 then
+                room.player.health = room.player.health + 2
+            end
+            table.remove(room.objects, k)
         end
     }
 }

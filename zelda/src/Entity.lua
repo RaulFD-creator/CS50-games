@@ -28,6 +28,7 @@ function Entity:init(def)
     self.walkSpeed = def.walkSpeed
 
     self.health = def.health
+    self.monster = def.monster
 
     -- flags for flashing the entity when hit
     self.invulnerable = false
@@ -38,6 +39,7 @@ function Entity:init(def)
     self.flashTimer = 0
 
     self.dead = false
+    self.nothearted = true
 end
 
 function Entity:createAnimations(animations)

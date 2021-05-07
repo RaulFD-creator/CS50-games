@@ -64,7 +64,8 @@ function Room:generateEntities()
             width = 16,
             height = 16,
 
-            health = 1
+            health = 1, 
+            monster = true
         })
 
         self.entities[i].stateMachine = StateMachine {
@@ -158,7 +159,19 @@ function Room:update(dt)
 
         -- remove entity from the table if health is <= 0
         if entity.health <= 0 then
+            if entity.monster and entity.nothearted then
+                local prob = math.random(100)
+                if prob > 30 then
+                    table.insert(self.objects, GameObject(
+                        GAME_OBJECT_DEFS['heart'],
+                        entity.x, entity.y
+                    ))
+                end
+
+                entity.nothearted = false
+            end
             entity.dead = true
+
         elseif not entity.dead then
             entity:processAI({room = self}, dt)
             entity:update(dt)
@@ -181,7 +194,11 @@ function Room:update(dt)
 
         -- trigger collision callback on object
         if self.player:collides(object) then
-            object:onCollide()
+            if object.type == 'heart' then 
+                object:onCollide(self, k)
+            else
+                object:onCollide()
+            end
         end
     end
 end

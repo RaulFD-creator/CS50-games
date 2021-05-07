@@ -38,11 +38,8 @@ GAME_OBJECT_DEFS = {
         height = 11,
         solid = true,  
 
-        onCollide = function(self, room, dt)
-                -- assume we didn't hit a wall
-                room.player.bumped = false
-                
-                -- boundary checking on all sides, allowing us to avoid collision detection on tiles
+        onCollide = function(self, room, k)
+
                 if room.player.direction == 'left' then
                     if room.player.x > self.x + self.width / 2 then
                         room.player.x = self.x + (self.width / 2 + 6)

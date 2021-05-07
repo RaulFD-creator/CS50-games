@@ -204,7 +204,7 @@ function Room:update(dt)
             if object.type == 'heart' then 
                 object:onCollide(self, k)
             elseif object.type == 'pot' then
-                object:onCollide(self, dt)
+                object:onCollide(self, k)
             else
                 object:onCollide()
             end

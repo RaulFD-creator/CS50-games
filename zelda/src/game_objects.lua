@@ -26,5 +26,17 @@ GAME_OBJECT_DEFS = {
     },
     ['pot'] = {
         -- TODO
+    },
+    ['heart'] = {
+        type = 'heart',
+        texture = 'heart',
+        frame = 5,
+        width = 16,
+        height = 16,
+        solid = false,
+        OnCollide = function(player, object) 
+            gSounds['pickup']:play()
+            player.health = player.health + 1
+        end
     }
 }

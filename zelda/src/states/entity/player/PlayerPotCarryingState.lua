@@ -12,16 +12,16 @@ end
 function PlayerPotCarryingState:update(dt)
     if love.keyboard.isDown('left') then
         self.entity.direction = 'left'
-        self.entity:changeAnimation('walk-left')
+        self.entity:changeAnimation('lift-walk-left')
     elseif love.keyboard.isDown('right') then
         self.entity.direction = 'right'
-        self.entity:changeAnimation('walk-right')
+        self.entity:changeAnimation('lift-walk-right')
     elseif love.keyboard.isDown('up') then
         self.entity.direction = 'up'
-        self.entity:changeAnimation('walk-up')
+        self.entity:changeAnimation('lift-walk-up')
     elseif love.keyboard.isDown('down') then
         self.entity.direction = 'down'
-        self.entity:changeAnimation('walk-down')
+        self.entity:changeAnimation('lift-walk-down')
     else
         self.entity:changeState('carry-pot-idle')
     end

@@ -98,25 +98,25 @@ ENTITY_DEFS = {
                 texture = 'lift-pots'
             },
             ---------------------------
-            ['lift-left'] = {
-                frames = {10, 11, 12},
+            ['lift-walk-left'] = {
+                frames = {13, 14, 15, 16},
                 interval = 0.15,
-                texture = 'lift-pots'
+                texture = 'lift-walk'
             },
-            ['lift-right'] = {
-                frames = {4, 5, 6},
+            ['lift-walk-right'] = {
+                frames = {5, 6, 7, 8},
                 interval = 0.15,
-                texture = 'lift-pots'
+                texture = 'lift-walk'
             },
-            ['lift-down'] = {
-                frames = {1, 2, 3},
+            ['lift-walk-down'] = {
+                frames = {1, 2, 3, 4},
                 interval = 0.15,
-                texture = 'lift-pots'
+                texture = 'lift-walk'
             },
-            ['lift-up'] = {
-                frames = {7, 8, 9},
+            ['lift-walk-up'] = {
+                frames = {9, 10, 11, 12},
                 interval = 0.15,
-                texture = 'lift-pots'
+                texture = 'lift-walk'
             },
 
         },

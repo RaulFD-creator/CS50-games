@@ -42,19 +42,19 @@ function Projectile:update(dt)
 
     self.counter2 = self.counter2 + dt
 
-    if not self.thrown and self.counter < 4 *TILE_SIZE + 1 then
+    if not self.thrown  then
         self.x = self.room.player.x 
         self.y = self.room.player.y - 12
-    elseif self.direction_thrown == 'right' then
+    elseif self.direction_thrown == 'right' and self.counter < 4 *TILE_SIZE + 1 then
         self.x = self.x + 1
         self.counter = self.counter + 1
-    elseif self.direction_thrown == 'left' then
+    elseif self.direction_thrown == 'left' and self.counter < 4 *TILE_SIZE + 1 then
         self.x = self.x - 1
         self.counter = self.counter + 1
-    elseif self.direction_thrown == 'up' then
+    elseif self.direction_thrown == 'up' and self.counter < 4 *TILE_SIZE + 1 then
         self.y = self.y - 1
         self.counter = self.counter + 1
-    elseif self.direction_thrown == 'down' then
+    elseif self.direction_thrown == 'down' and self.counter < 4 *TILE_SIZE + 1 then
         self.y = self.y + 1
         self.counter = self.counter + 1 
     end

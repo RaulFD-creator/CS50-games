@@ -87,14 +87,6 @@ function Room:generateObjects()
         math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
                     VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)
     )
-    for l = 1, math.random(4) do
-        table.insert(self.objects, GameObject(GAME_OBJECT_DEFS['pot'],
-        math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
-                    VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
-        math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
-                    VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)))
-    end
-
     -- define a function for the switch that will open all doors in the room
     switch.onCollide = function()
         if switch.state == 'unpressed' then
@@ -111,6 +103,14 @@ function Room:generateObjects()
 
     -- add to list of objects in scene (only one switch for now)
     table.insert(self.objects, switch)
+    
+    for l = 1, math.random(4) do
+        table.insert(self.objects, GameObject(GAME_OBJECT_DEFS['pot'],
+        math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
+                    VIRTUAL_WIDTH - TILE_SIZE * 2 - 16),
+        math.random(MAP_RENDER_OFFSET_Y + TILE_SIZE,
+                    VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) + MAP_RENDER_OFFSET_Y - TILE_SIZE - 16)))
+    end
 end
 
 --[[

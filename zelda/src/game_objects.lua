@@ -36,10 +36,10 @@ GAME_OBJECT_DEFS = {
         frame = 14,
         width = 11,
         height = 11,
-        solid = true,  
+        solid = true,
 
         onCollide = function(self, room, k)
-
+            if not self.used then
                 if room.player.direction == 'left' then
                     if room.player.x > self.x + self.width / 2 then
                         room.player.x = self.x + (self.width / 2 + 6)
@@ -61,12 +61,22 @@ GAME_OBJECT_DEFS = {
                     end
                 end
 
-                if love.keyboard.isDown('return') then
+                if love.keyboard.isDown('return') and not room.player.carrying then
                     gSounds['pickup']:play() 
                     room.player:changeState('carry-pot')
-                    table.remove(room.objects, k)
+                    solid = false
+                    self.used = true
+                    room.player.carrying = true
                 end
             end
+        end,
+
+        follow = function(self, room)
+            if self.used then
+                self.x = room.player.x 
+                self.y = room.player.y - 10
+            end
+        end
     },
     ['heart'] = {
         type = 'heart',

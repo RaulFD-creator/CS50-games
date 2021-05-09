@@ -67,23 +67,21 @@ function Projectile:update(dt)
 
     -- boundary checking on all sides, allowing us to avoid collision detection on tiles
         
-        if self.x <= MAP_RENDER_OFFSET_X + TILE_SIZE then 
-            self.crashed = true
-        end
-        if self.x + self.width >= VIRTUAL_WIDTH - TILE_SIZE * 2 then
-            self.crashed = true
-        end
-        if self.y <= MAP_RENDER_OFFSET_Y + TILE_SIZE - self.height / 2 then 
-            self.crashed = true
-        end
-        local bottomEdge = VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) 
-            + MAP_RENDER_OFFSET_Y - TILE_SIZE
+    if self.x <= MAP_RENDER_OFFSET_X + TILE_SIZE then 
+        self.crashed = true
+    end
+    if self.x + self.width >= VIRTUAL_WIDTH - TILE_SIZE * 2 then
+        self.crashed = true
+    end
+    if self.y <= MAP_RENDER_OFFSET_Y + TILE_SIZE - self.height / 2 then 
+        self.crashed = true
+    end
+    local bottomEdge = VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) 
+        + MAP_RENDER_OFFSET_Y - TILE_SIZE
 
-        if self.y + self.height >= bottomEdge then
-            self.crashed = true
-        end
-    
-
+    if self.y + self.height >= bottomEdge then
+        self.crashed = true
+    end
 
     if self.crashed and self.thrown then
         self.counter3 = self.counter3 + dt

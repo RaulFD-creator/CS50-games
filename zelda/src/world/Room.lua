@@ -209,6 +209,10 @@ function Room:update(dt)
                 object:onCollide()
             end
         end
+        
+        if object.used then
+            object:follow(self)
+        end
     end
 end
 

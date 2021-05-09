@@ -32,6 +32,7 @@ function GameObject:init(def, x, y)
 
     -- default empty collision callback
     self.onCollide = def.onCollide or function() end
+    self.follow = def.follow or function() end
 end
 
 function GameObject:update(dt)

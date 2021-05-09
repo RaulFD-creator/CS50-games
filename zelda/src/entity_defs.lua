@@ -118,6 +118,23 @@ ENTITY_DEFS = {
                 interval = 0.15,
                 texture = 'lift-walk'
             },
+            --------------------------
+            ['lift-idle-left'] = {
+                frames = {13},
+                texture = 'lift-walk'
+            },
+            ['lift-idle-right'] = {
+                frames = {5},
+                texture = 'lift-walk'
+            },
+            ['lift-idle-down'] = {
+                frames = {1},
+                texture = 'lift-walk'
+            },
+            ['lift-idle-up'] = {
+                frames = {9},
+                texture = 'lift-walk'
+            },
 
         },
         monster = false

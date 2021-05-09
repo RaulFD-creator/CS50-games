@@ -67,16 +67,27 @@ GAME_OBJECT_DEFS = {
                     solid = false
                     self.used = true
                     room.player.carrying = true
+                    table.insert(room.objects, Projectile({
+                        type = 'pot',
+                        texture = 'pots',
+                        defaultState = 'unpressed',
+                        states = {
+                            ['unpressed'] = {
+                                frame = 14
+                            }
+                        },
+                        frame = 14,
+                        width = 11,
+                        height = 11,
+                        solid = true,
+                        room = room
+                    },
+                self.x, self.y))
+                    table.remove(room.objects, k)
                 end
             end
-        end,
-
-        follow = function(self, room)
-            if self.used then
-                self.x = room.player.x 
-                self.y = room.player.y - 12
-            end
         end
+
     },
     ['heart'] = {
         type = 'heart',

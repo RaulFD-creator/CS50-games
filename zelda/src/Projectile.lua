@@ -49,25 +49,43 @@ function Projectile:update(dt)
     if not self.thrown then
         self.x = self.room.player.x 
         self.y = self.room.player.y - 12
-    elseif self.direction_thrown == 'right' and self.counter < 4 *TILE_SIZE + 1 then
+    elseif self.direction_thrown == 'right' and self.counter < 4 *TILE_SIZE + 1 and not self.crashed then
         self.x = self.x + 1
         self.counter = self.counter + 1
-    elseif self.direction_thrown == 'left' and self.counter < 4 *TILE_SIZE + 1 then
+    elseif self.direction_thrown == 'left' and self.counter < 4 *TILE_SIZE + 1 and not self.crashed then
         self.x = self.x - 1
         self.counter = self.counter + 1
-    elseif self.direction_thrown == 'up' and self.counter < 4 *TILE_SIZE + 1 then
+    elseif self.direction_thrown == 'up' and self.counter < 4 *TILE_SIZE + 1 and not self.crashed then
         self.y = self.y - 1
         self.counter = self.counter + 1
-    elseif self.direction_thrown == 'down' and self.counter < 4 *TILE_SIZE + 1 then
+    elseif self.direction_thrown == 'down' and self.counter < 4 *TILE_SIZE + 1 and not self.crashed then
         self.y = self.y + 1
         self.counter = self.counter + 1 
     else
         self.crashed = true
     end
 
-    if 
+    -- boundary checking on all sides, allowing us to avoid collision detection on tiles
+        
+        if self.x <= MAP_RENDER_OFFSET_X + TILE_SIZE then 
+            self.crashed = true
+        end
+        if self.x + self.width >= VIRTUAL_WIDTH - TILE_SIZE * 2 then
+            self.crashed = true
+        end
+        if self.y <= MAP_RENDER_OFFSET_Y + TILE_SIZE - self.height / 2 then 
+            self.crashed = true
+        end
+        local bottomEdge = VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT - MAP_HEIGHT * TILE_SIZE) 
+            + MAP_RENDER_OFFSET_Y - TILE_SIZE
 
-    if self.crashed then
+        if self.y + self.height >= bottomEdge then
+            self.crashed = true
+        end
+    
+
+
+    if self.crashed and self.thrown then
         self.counter3 = self.counter3 + dt
         self.state = 'shattered'
         if self.counter3 > 1.5 then

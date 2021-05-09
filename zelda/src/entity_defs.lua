@@ -46,6 +46,7 @@ ENTITY_DEFS = {
                 frames = {9},
                 texture = 'character-walk'
             },
+            -------------------------------
             ['sword-left'] = {
                 frames = {13, 14, 15, 16},
                 interval = 0.05,
@@ -69,6 +70,31 @@ ENTITY_DEFS = {
                 interval = 0.05,
                 looping = false,
                 texture = 'character-swing-sword'
+            },
+            ----------------------------------
+            ['lift-left'] = {
+                frames = {17, 18, 19},
+                interval = 0.05,
+                looping = false,
+                texture = 'lift-pots'
+            },
+            ['lift-right'] = {
+                frames = {7, 8, 9},
+                interval = 0.05,
+                looping = false,
+                texture = 'lift-pots'
+            },
+            ['lift-down'] = {
+                frames = {1, 2, 3},
+                interval = 0.05,
+                looping = false,
+                texture = 'lift-pots'
+            },
+            ['lift-up'] = {
+                frames = {11, 12, 13},
+                interval = 0.05,
+                looping = false,
+                texture = 'lift-pots'
             }
         },
         monster = false

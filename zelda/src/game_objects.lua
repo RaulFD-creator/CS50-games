@@ -63,7 +63,7 @@ GAME_OBJECT_DEFS = {
 
                 if love.keyboard.isDown('return') and not room.player.carrying then
                     gSounds['pickup']:play() 
-                    room.player:changeState('carry-pot')
+                    room.player:changeState('carry-pot-idle')
                     solid = false
                     self.used = true
                     room.player.carrying = true
@@ -74,7 +74,7 @@ GAME_OBJECT_DEFS = {
         follow = function(self, room)
             if self.used then
                 self.x = room.player.x 
-                self.y = room.player.y - 10
+                self.y = room.player.y - 12
             end
         end
     },

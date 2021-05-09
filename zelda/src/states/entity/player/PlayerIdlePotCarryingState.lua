@@ -1,16 +1,21 @@
-PlayerIdlePotCarryingState = Class{__includes = EntityIdleState}
+PlayerIdlePotCarryingState = Class{__includes = BaseState}
+
+function PlayerIdlePotCarryingState:init(player, dungeon)
+    self.player = player
+    self.dungeon = dungeon
+end
 
 function PlayerIdlePotCarryingState:enter(params)
     
     -- render offset for spaced character sprite (negated in render function of state)
-    self.entity.offsetY = 5
-    self.entity.offsetX = 0
+    self.player.offsetY = 5
+    self.player.offsetX = 0
 end
 
 function PlayerIdlePotCarryingState:update(dt)
     if love.keyboard.isDown('left') or love.keyboard.isDown('right') or
        love.keyboard.isDown('up') or love.keyboard.isDown('down') then
-        self.entity:changeState('carry-pot')
+        self.player:changeState('carry-pot')
     end
 
     if love.keyboard.wasPressed('return') then

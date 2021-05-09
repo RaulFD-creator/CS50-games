@@ -45,7 +45,8 @@ gTextures = {
     ['hearts'] = love.graphics.newImage('graphics/hearts.png'),
     ['switches'] = love.graphics.newImage('graphics/switches.png'),
     ['entities'] = love.graphics.newImage('graphics/entities.png'),
-    ['pots'] = love.graphics.newImage('graphics/tilesheet.png')
+    ['pots'] = love.graphics.newImage('graphics/tilesheet.png'),
+    ['lift-pots'] = love.graphics.newImage('graphics/character_pot_lift.png')
 }
 
 gFrames = {
@@ -55,7 +56,8 @@ gFrames = {
     ['entities'] = GenerateQuads(gTextures['entities'], 16, 16),
     ['hearts'] = GenerateQuads(gTextures['hearts'], 16, 16),
     ['switches'] = GenerateQuads(gTextures['switches'], 16, 18),
-    ['pots'] = GenerateQuads(gTextures['pots'], 16, 16)
+    ['pots'] = GenerateQuads(gTextures['pots'], 16, 16),
+    ['lift-pots'] = GenerateQuads(gTextures['lift-pots'], 16, 16)
 }
 
 gFonts = {

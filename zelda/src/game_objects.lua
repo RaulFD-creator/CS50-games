@@ -27,9 +27,9 @@ GAME_OBJECT_DEFS = {
     ['pot'] = {
         type = 'pot',
         texture = 'pots',
-        defaultState = 'unpressed',
+        defaultState = 'whole',
         states = {
-            ['unpressed'] = {
+            ['whole'] = {
                 frame = 14
             }
         },
@@ -62,11 +62,12 @@ GAME_OBJECT_DEFS = {
                 end
 
                 if love.keyboard.isDown('return') and not room.player.carrying then
-                    gSounds['pickup']:play() 
+            
                     room.player:changeState('carry-pot-lift')
                     solid = false
                     self.used = true
                     room.player.carrying = true
+                    
                     table.insert(room.objects, Projectile({
                         type = 'pot',
                         texture = 'pots',
@@ -86,6 +87,7 @@ GAME_OBJECT_DEFS = {
                         room = room
                     },
                 self.x, self.y))
+
                     table.remove(room.objects, k)
                 end
             end

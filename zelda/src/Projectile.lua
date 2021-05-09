@@ -65,6 +65,8 @@ function Projectile:update(dt)
         self.crashed = true
     end
 
+    if 
+
     if self.crashed then
         self.counter3 = self.counter3 + dt
         self.state = 'shattered'
@@ -81,7 +83,7 @@ end
 function Projectile:throw(direction)
     self.thrown = true
     self.direction_thrown = direction
-    self.carrying = false
+    self.room.player.carrying = false
     self.room.player:changeState('idle')
 end
 

@@ -63,7 +63,7 @@ GAME_OBJECT_DEFS = {
 
                 if love.keyboard.isDown('return') and not room.player.carrying then
                     gSounds['pickup']:play() 
-                    room.player:changeState('carry-pot-idle')
+                    room.player:changeState('carry-pot-lift')
                     solid = false
                     self.used = true
                     room.player.carrying = true

@@ -70,10 +70,13 @@ GAME_OBJECT_DEFS = {
                     table.insert(room.objects, Projectile({
                         type = 'pot',
                         texture = 'pots',
-                        defaultState = 'unpressed',
+                        defaultState = 'whole',
                         states = {
-                            ['unpressed'] = {
+                            ['whole'] = {
                                 frame = 14
+                            }, 
+                            ['shattered'] = {
+                                frame = 52
                             }
                         },
                         frame = 14,

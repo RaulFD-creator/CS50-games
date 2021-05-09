@@ -73,13 +73,13 @@ ENTITY_DEFS = {
             },
             ----------------------------------
             ['lift-left'] = {
-                frames = {17, 18, 19},
+                frames = {10, 11, 12},
                 interval = 0.05,
                 looping = false,
                 texture = 'lift-pots'
             },
             ['lift-right'] = {
-                frames = {7, 8, 9},
+                frames = {4, 5, 6},
                 interval = 0.05,
                 looping = false,
                 texture = 'lift-pots'
@@ -91,7 +91,7 @@ ENTITY_DEFS = {
                 texture = 'lift-pots'
             },
             ['lift-up'] = {
-                frames = {11, 12, 13},
+                frames = {7, 8, 9},
                 interval = 0.05,
                 looping = false,
                 texture = 'lift-pots'

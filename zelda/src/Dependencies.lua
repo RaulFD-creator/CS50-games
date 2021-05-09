@@ -57,7 +57,7 @@ gFrames = {
     ['hearts'] = GenerateQuads(gTextures['hearts'], 16, 16),
     ['switches'] = GenerateQuads(gTextures['switches'], 16, 18),
     ['pots'] = GenerateQuads(gTextures['pots'], 16, 16),
-    ['lift-pots'] = GenerateQuads(gTextures['lift-pots'], 16, 16)
+    ['lift-pots'] = GenerateQuads(gTextures['lift-pots'], 16, 32)
 }
 
 gFonts = {

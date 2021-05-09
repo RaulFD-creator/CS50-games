@@ -63,6 +63,7 @@ GAME_OBJECT_DEFS = {
 
                 if love.keyboard.isDown('return') then
                     gSounds['pickup']:play() 
+                    room.player:changeState('carry-pot')
                     table.remove(room.objects, k)
                 end
             end

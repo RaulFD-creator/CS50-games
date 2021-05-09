@@ -103,7 +103,7 @@ function Room:generateObjects()
 
     -- add to list of objects in scene (only one switch for now)
     table.insert(self.objects, switch)
-    
+
     for l = 1, math.random(4) do
         table.insert(self.objects, GameObject(GAME_OBJECT_DEFS['pot'],
         math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,
@@ -209,7 +209,9 @@ function Room:update(dt)
                 object:onCollide()
             end
         end
-        
+        if object.remove then
+            table.remove(self.objects, k)
+        end
         if object.used then
             object:follow(self)
         end

@@ -30,19 +30,23 @@ function Projectile:init(def, x, y)
     self.height = def.height
     self.thrown = false
     self.room = def.room
+    self.remove = false
+    self.crashed = false
     
     -- default empty collision callback
     self.onCollide = def.onCollide or function() end
     self.follow = def.follow or function() end
     self.counter = 0 
     self.counter2 = 0
+    self.counter3 = 0
 end
     
 function Projectile:update(dt)
 
     self.counter2 = self.counter2 + dt
 
-    if not self.thrown  then
+    -- Crash after 4 tiles
+    if not self.thrown then
         self.x = self.room.player.x 
         self.y = self.room.player.y - 12
     elseif self.direction_thrown == 'right' and self.counter < 4 *TILE_SIZE + 1 then
@@ -57,10 +61,19 @@ function Projectile:update(dt)
     elseif self.direction_thrown == 'down' and self.counter < 4 *TILE_SIZE + 1 then
         self.y = self.y + 1
         self.counter = self.counter + 1 
+    else
+        self.crashed = true
     end
 
-    
-    if love.keyboard.isDown('return') and self.counter2 > 2 then
+    if self.crashed then
+        self.counter3 = self.counter3 + dt
+        self.state = 'shattered'
+        if self.counter3 > 1.5 then
+            self.remove = true
+        end
+    end
+
+    if love.keyboard.isDown('return') and self.counter2 > 1 then
         self:throw(self.room.player.direction)   
     end
 end

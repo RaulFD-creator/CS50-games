@@ -52,6 +52,8 @@ function Dungeon:beginShifting(shiftX, shiftY)
     -- commence shifting and create a new room to transition to
     self.shifting = true
     self.nextRoom = Room(self.player)
+    self.player:changeState('idle')
+    self.player.carrying = false
 
     -- start all doors in next room as open until we get in
     for k, doorway in pairs(self.nextRoom.doorways) do

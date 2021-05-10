@@ -174,6 +174,11 @@ function Level:update(dt)
 
     -- replace launch marker if original alien stopped moving
     if self.launchMarker.launched then
+        if counter == 3 and self.launchMarker.spawn then
+            self.launchMarker = AlienLaunchMarker(self.world)
+        elseif counter == 1 and not self.launchMarker.spawn then
+            self.launchMarker = AlienLaunchMarker(self.world)
+        end
 
         for k, alien in pairs(self.launchMarker.alien) do
             local xPos, yPos = alien.body:getPosition()
@@ -182,10 +187,9 @@ function Level:update(dt)
             -- if we fired our alien to the left or it's almost done rolling, respawn
             if xPos < 0 or (math.abs(xVel) + math.abs(yVel) < 1.5) then
                 alien.body:destroy()
+                table.remove(self.launchMarker.alien, k)
+                counter = counter + 1
 
-                if not self.alien then
-                    self.launchMarker = AlienLaunchMarker(self.world)
-                end
                 -- re-initialize level if we have no more aliens
                 if #self.aliens == 0 then
                     gStateMachine:change('start')

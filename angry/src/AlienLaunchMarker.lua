@@ -29,6 +29,7 @@ function AlienLaunchMarker:init(world)
     self.alien = {}
     self.spawn = false
     hit = false
+    counter = 0
 end
 
 function AlienLaunchMarker:update(dt)

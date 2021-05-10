@@ -28,7 +28,7 @@ function AlienLaunchMarker:init(world)
     -- our alien we will eventually spawn
     self.alien = {}
     self.spawn = false
-    self.hit = false
+    hit = false
 end
 
 function AlienLaunchMarker:update(dt)
@@ -83,13 +83,13 @@ function AlienLaunchMarker:update(dt)
             self.velocity['dy'] = self.velocity['dy'] + 30 * dt
         end
 
-        if not self.hit then
+        if not hit then
             if love.keyboard.isDown('space') and not self.spawn then
                 for l = 2,3 do
                     table.insert(self.alien, 
                     Alien(self.world, 'round', self.position['x'], self.position['y'], 'Player'))
-                    self.alien[l].body:setLinearVelocity(self.velocity['dx'] * 0.8, 
-                                                    self.velocity['dy'] * 0.7 *(-1) ^ l)
+                    self.alien[l].body:setLinearVelocity(self.velocity['dx'] * 0.9, 
+                                                    self.velocity['dy'] * 0.2 * (-1) ^ l)
 
                     self.alien[l].fixture:setRestitution(0.4)
                     self.alien[l].body:setAngularDamping(1)

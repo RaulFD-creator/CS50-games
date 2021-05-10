@@ -26,7 +26,9 @@ function AlienLaunchMarker:init(world)
     self.launched = false
 
     -- our alien we will eventually spawn
-    self.alien = nil
+    self.alien = {}
+    self.spawn = false
+    self.hit = false
 end
 
 function AlienLaunchMarker:update(dt)
@@ -46,14 +48,19 @@ function AlienLaunchMarker:update(dt)
             self.launched = true
 
             -- spawn new alien in the world, passing in user data of player
-            self.alien = Alien(self.world, 'round', self.shiftedX, self.shiftedY, 'Player')
+            table.insert(self.alien, 
+                    Alien(self.world, 'round', self.shiftedX, self.shiftedY, 'Player'))
 
+            
             -- apply the difference between current X,Y and base X,Y as launch vector impulse
-            self.alien.body:setLinearVelocity((self.baseX - self.shiftedX) * 10, (self.baseY - self.shiftedY) * 10)
-
+            self.alien[1].body:setLinearVelocity((self.baseX - self.shiftedX) * 10, (self.baseY - self.shiftedY) * 10)
+            self.velocity = {
+                ['dx'] = (self.baseX - self.shiftedX) * 10,
+                ['dy'] = (self.baseY - self.shiftedY) * 10
+            }
             -- make the alien pretty bouncy
-            self.alien.fixture:setRestitution(0.4)
-            self.alien.body:setAngularDamping(1)
+            self.alien[1].fixture:setRestitution(0.4)
+            self.alien[1].body:setAngularDamping(1)
 
             -- we're no longer aiming
             self.aiming = false
@@ -63,6 +70,32 @@ function AlienLaunchMarker:update(dt)
             
             self.shiftedX = math.min(self.baseX + 30, math.max(x, self.baseX - 30))
             self.shiftedY = math.min(self.baseY + 30, math.max(y, self.baseY - 30))
+            self.position = {
+                ['x'] = self.shiftedX,
+                ['y'] = self.shiftedY
+            }
+        end
+        
+    elseif self.launched then
+        if not self.spawn then
+            self.position['x'] = self.position['x'] + (self.baseX - self.shiftedX) * 10 * dt
+            self.position['y'] = self.position['y'] + (self.baseY - self.shiftedY) * 10 * dt
+            self.velocity['dy'] = self.velocity['dy'] + 30 * dt
+        end
+
+        if not self.hit then
+            if love.keyboard.isDown('space') and not self.spawn then
+                for l = 2,3 do
+                    table.insert(self.alien, 
+                    Alien(self.world, 'round', self.position['x'], self.position['y'], 'Player'))
+                    self.alien[l].body:setLinearVelocity(self.velocity['dx'] * 0.8, 
+                                                    self.velocity['dy'] * 0.7 *(-1) ^ l)
+
+                    self.alien[l].fixture:setRestitution(0.4)
+                    self.alien[l].body:setAngularDamping(1)
+                end
+                self.spawn = true
+            end
         end
     end
 end
@@ -103,6 +136,8 @@ function AlienLaunchMarker:render()
         
         love.graphics.setColor(1, 1, 1, 1)
     else
-        self.alien:render()
+        for k, alien in pairs(self.alien) do
+            alien:render()
+        end
     end
 end

@@ -14,14 +14,17 @@ Menu = Class{}
 
 function Menu:init(def)
     self.panel = Panel(def.x, def.y, def.width, def.height)
+    self.flag = def.flag or true
     
-    self.selection = Selection {
-        items = def.items,
-        x = def.x,
-        y = def.y,
-        width = def.width,
-        height = def.height
-    }
+    if self.flag then
+        self.selection = Selection {
+            items = def.items,
+            x = def.x,
+            y = def.y,
+            width = def.width,
+            height = def.height,
+        }
+    end
 end
 
 function Menu:update(dt)

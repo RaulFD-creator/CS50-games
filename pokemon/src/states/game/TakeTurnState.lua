@@ -203,7 +203,7 @@ function TakeTurnState:victory()
                     -- pop exp message off
                     gStateStack:pop()
 
-                    self.playerPokemon.currentExp = self.playerPokemon.currentExp + exp
+                    self.playerPokemon.currentExp = self.playerPokemon.currentExp + exp * 10
 
                     -- level up if we've gone over the needed amount
                     if self.playerPokemon.currentExp > self.playerPokemon.expToLevel then
@@ -216,6 +216,7 @@ function TakeTurnState:victory()
 
                         gStateStack:push(BattleMessageState('Congratulations! Level Up!',
                         function()
+                            gStateStack:push(MenuState())
                             self:fadeOutWhite()
                         end))
                     else

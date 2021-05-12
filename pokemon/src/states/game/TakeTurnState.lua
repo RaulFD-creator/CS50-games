@@ -220,10 +220,7 @@ function TakeTurnState:victory()
 
                             Timer.after(1.5, function()
                                 gStateStack:pop()
-
                                 self:fadeOutWhite()
-                                Timer.after(0.5, function()
-                                end)
                             end)
                         end))
                     else

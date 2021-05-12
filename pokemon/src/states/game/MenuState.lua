@@ -11,10 +11,10 @@ MenuState = Class{__includes = BaseState}
 function MenuState:init()
     
     self.Menu = Menu {
-        x = VIRTUAL_WIDTH - 356,
-        y = VIRTUAL_HEIGHT - 356,
-        width = 128,
-        height = 128,
+        x = VIRTUAL_WIDTH - (VIRTUAL_WIDTH / 2 + 100),
+        y = VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT / 2 + 70),
+        width = 400,
+        height = 100,
         flag = false,
         items = {
             {

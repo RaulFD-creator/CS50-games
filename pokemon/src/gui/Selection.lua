@@ -67,9 +67,9 @@ function Selection:render()
         if i == self.currentSelection and self.flag then
             love.graphics.draw(gTextures['cursor'], self.x - 8, paddedY)
         end
-        if self.flag then
-            love.graphics.printf(self.items[i].text, self.x, paddedY, self.width, 'center')
-        end
+        
+        love.graphics.printf(self.items[i].text, self.x, paddedY, self.width, 'center')
+        
         currentY = currentY + self.gapHeight
     end
 end

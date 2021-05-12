@@ -217,7 +217,14 @@ function TakeTurnState:victory()
                         gStateStack:push(BattleMessageState('Congratulations! Level Up!',
                         function()
                             gStateStack:push(MenuState())
-                            self:fadeOutWhite()
+
+                            Timer.after(1.5, function()
+                                gStateStack:pop()
+
+                                self:fadeOutWhite()
+                                Timer.after(0.5, function()
+                                end)
+                            end)
                         end))
                     else
                         self:fadeOutWhite()

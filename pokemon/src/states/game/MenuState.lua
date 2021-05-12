@@ -12,8 +12,8 @@ function MenuState:init()
     
     self.Menu = Menu {
         x = VIRTUAL_WIDTH - (VIRTUAL_WIDTH / 2 + 100),
-        y = VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT / 2 + 70),
-        width = 400,
+        y = VIRTUAL_HEIGHT - (VIRTUAL_HEIGHT / 2 + 85),
+        width = 250,
         height = 100,
         flag = false,
         items = {

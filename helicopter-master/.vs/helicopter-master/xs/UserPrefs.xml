@@ -1,21 +1,24 @@
 ﻿<Properties StartupConfiguration="{1D4EDEBA-7C20-DA01-66D0-01285086E519}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/HeliController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/SkyscraperSpawner.cs">
     <Files>
       <File FileName="Assets/Resources/Scripts/Airplane.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/CoinSpawner.cs" Line="6" Column="1" />
-      <File FileName="Assets/Resources/Scripts/Coin.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/GemSpawner.cs" Line="8" Column="20" />
-      <File FileName="Assets/Resources/Scripts/Gem.cs" Line="37" Column="69" />
-      <File FileName="Assets/Resources/Scripts/HeliController.cs" Line="63" Column="22" />
+      <File FileName="Assets/Resources/Scripts/CoinSpawner.cs" Line="6" Column="30" />
+      <File FileName="Assets/Resources/Scripts/Coin.cs" Line="9" Column="3" />
+      <File FileName="Assets/Resources/Scripts/GemSpawner.cs" Line="8" Column="1" />
+      <File FileName="Assets/Resources/Scripts/ScrollingBackground.cs" Line="27" Column="1" />
+      <File FileName="Assets/Resources/Scripts/GameOverText.cs" Line="33" Column="1" />
+      <File FileName="Assets/Resources/Scripts/SkyscraperSpawner.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="helicopter-master" expanded="True">
             <Node name="Assets" expanded="True">
+              <Node name="ProtoPack" expanded="True" />
               <Node name="Resources" expanded="True">
+                <Node name="Scenes" expanded="True" />
                 <Node name="Scripts" expanded="True">
-                  <Node name="HeliController.cs" selected="True" />
+                  <Node name="SkyscraperSpawner.cs" selected="True" />
                 </Node>
               </Node>
             </Node>

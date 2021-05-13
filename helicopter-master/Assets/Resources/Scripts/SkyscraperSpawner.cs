@@ -27,7 +27,7 @@ public class SkyscraperSpawner : MonoBehaviour {
 
 			// randomly increase the speed by 1
 			if (Random.Range(1, 4) == 1) {
-				speed += 1f;
+				speed += 10f;
 			}
 
 			// wait between 1-5 seconds for a new skyscraper to spawn

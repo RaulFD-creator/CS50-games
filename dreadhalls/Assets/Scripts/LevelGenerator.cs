@@ -55,10 +55,13 @@ public class LevelGenerator : MonoBehaviour {
 
 					// flag as placed so we never consider placing again
 					characterPlaced = true;
+					CreateChildPrefab(floorPrefab, floorParent, x, 0, z);
 				}
 
 				// create floor and ceiling
-				CreateChildPrefab(floorPrefab, floorParent, x, 0, z);
+				if (Random.Range(1, 100) < 80) {
+					CreateChildPrefab(floorPrefab, floorParent, x, 0, z);
+						}
 
 				if (generateRoof) {
 					CreateChildPrefab(ceilingPrefab, wallsParent, x, 4, z);

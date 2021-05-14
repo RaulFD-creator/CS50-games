@@ -21,6 +21,7 @@ public class GameOver_controller : MonoBehaviour
         if (m_CharacterController.transform.localPosition.y < death_limit)
         {
             SceneManager.LoadScene("GameOver");
+            Initialise_level.Level = 1;
              if (DontDestroy.instance)
              {
                  DontDestroy.instance.GetComponents<AudioSource>()[0].Stop();

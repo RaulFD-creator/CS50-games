@@ -82,11 +82,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
-
-            if (m_CharacterController.transform.localPosition.y < -2)
-            {
-                SceneManager.LoadScene("GameOver");
-            } 
         }
 
 

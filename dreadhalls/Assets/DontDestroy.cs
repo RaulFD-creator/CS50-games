@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DontDestroy : MonoBehaviour {
 
@@ -14,8 +15,12 @@ public class DontDestroy : MonoBehaviour {
 		if (instance == null) {
 			instance = this;
 			DontDestroyOnLoad(gameObject);
-		} else if (instance != this) {
-			Destroy(gameObject);
+		} else if (SceneManager.GetActiveScene().name == "GameOver") {
+			if (DontDestroy.instance)
+			{
+				DontDestroy.instance.GetComponents<AudioSource>()[0].Stop();
+				DontDestroy.instance = null;
+			}
 		}
 	}
 

@@ -22,12 +22,7 @@ public class LoadSceneOnInput : MonoBehaviour {
 			{
 				SceneManager.LoadScene("Title");
 			}
-			else
-			{
-				SceneManager.LoadScene("Play");
-				Initialise_level.Level += 1;
 
-			}
 		}
 
 	}

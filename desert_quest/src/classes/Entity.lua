@@ -23,6 +23,7 @@ function Entity:init(def)
 
     -- reference to level for tests against other entities + objects
     self.level = def.level
+    self.hitbox = Hitbox(self.x, self.y, self.width, self.height)
 end
 
 function Entity:changeState(state, params)

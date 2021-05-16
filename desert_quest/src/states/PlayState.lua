@@ -5,8 +5,7 @@ function PlayState:enter(params)
 end
 
 function PlayState:init()
-    gSounds['musics']['title_screen']:stop()
-    gSounds['musics']['play']:setLooping(true)
+    gSounds['musics']['play']:stop()
     gSounds['musics']['play']:play()
 end
 

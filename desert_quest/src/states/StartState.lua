@@ -27,7 +27,10 @@ function StartState:render()
     love.graphics.setColor(175/255, 53/255, 42/255, 1)
     love.graphics.printf('Desert Quest', 0, VIRTUAL_HEIGHT / 2 - 52, VIRTUAL_WIDTH, 'center')
 
-    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.setFont(gFonts['large'])
+    love.graphics.setColor(34/255, 34/255, 34/255, 1)
+    love.graphics.printf('Press Enter', 0, VIRTUAL_HEIGHT / 2 + 66, VIRTUAL_WIDTH, 'center')
+
+    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.printf('Press Enter', 0, VIRTUAL_HEIGHT / 2 + 64, VIRTUAL_WIDTH, 'center')
 end

@@ -1,5 +1,4 @@
 -- Calling main libraries
-
 Class = require 'lib/class'
 Event = require 'lib/knife.event'
 push = require 'lib/push'
@@ -17,6 +16,13 @@ require 'src/StateMachine'
 
 -- Loading Classes
 require 'src/classes/Entity'
+require 'src/classes/Player'
+require 'src/classes/GameLevel'
+require 'src/classes/GameObject'
+require 'src/classes/Hitbox'
+require 'src/classes/Tile'
+require 'src/classes/TileMap'
+require 'src/classes/LevelMaker'
 
 -- Loading Definitions
 require 'src/data/entity_defs'
@@ -32,9 +38,17 @@ gFonts = {
 -- Loading Textures
 gTextures = {
     ['backgrounds'] =  {
-        ['2'] = love.graphics.newImage('graphics/background.png'),
-        ['1'] = love.graphics.newImage('graphics/background2.jpg')
-    }
+        ['1'] = love.graphics.newImage('graphics/backgrounds/background.jpg'),
+        ['2'] = love.graphics.newImage('graphics/backgrounds/background2.png')
+    },
+    ['character'] = love.graphics.newImage('graphics/character/character_sprite.png'),
+    ['tiles'] = love.graphics.newImage('graphics/Tiles.png')
+}
+
+gFrames = {
+    ['character-animations'] = GenerateQuads(gTextures['character'], 224, 112),
+    ['tileset'] = GenerateQuads(gTextures['tiles'], 64, 50),
+    ['background'] = GenerateQuads(gTextures['backgrounds']['2'], 2127, 293)
 }
 
 gSounds = {

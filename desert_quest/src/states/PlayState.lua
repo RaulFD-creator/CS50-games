@@ -1,5 +1,15 @@
 PlayState = Class{__includes = BaseState}
 
+function PlayState:enter(params)
+
+end
+
+function PlayState:init()
+    gSounds['musics']['title_screen']:stop()
+    gSounds['musics']['play']:setLooping(true)
+    gSounds['musics']['play']:play()
+end
+
 function PlayState:update(dt) 
     if love.keyboard.wasPressed('escape') then
         love.event.quit()

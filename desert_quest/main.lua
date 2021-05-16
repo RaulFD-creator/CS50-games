@@ -52,6 +52,6 @@ end
 
 function love.draw()
     push:start()
-    --gStateMachine:render()
+    gStateMachine:render()
     push:finish()
 end

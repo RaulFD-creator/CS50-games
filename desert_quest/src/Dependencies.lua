@@ -16,6 +16,14 @@ require 'src/StateMachine'
 gFonts = {
     ['small'] = love.graphics.newFont('fonts/font.ttf', 8),
     ['medium'] = love.graphics.newFont('fonts/font.ttf', 16),
-    ['large'] = love.graphics.newFont('fonts/font.ttf', 32),
+    ['large'] = love.graphics.newFont('fonts/font.ttf', 44),
+    ['huge'] = love.graphics.newFont('fonts/font.ttf', 80)
 }
 
+-- Loading main Textures
+gTextures = {
+    ['backgrounds'] =  {
+        ['1'] = love.graphics.newImage('graphics/background.png'),
+        ['2'] = love.graphics.newImage('graphics/background2.jpg')
+    }
+}

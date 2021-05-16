@@ -16,18 +16,18 @@ function love.load()
         resizable = true
     })
 
-    --love.graphics.setFont(gFonts['small'])
+    love.graphics.setFont(gFonts['small'])
 
-   --[[ gStateMachine = StateMachine {
+    gStateMachine = StateMachine {
         ['start'] = function() return StartState() end,
-        ['play'] = function() return PlayState() end,
-        ['game-over'] = function() return GameOverState() end
+       -- ['play'] = function() return PlayState() end,
+       -- ['game-over'] = function() return GameOverState() end
     }
     gStateMachine:change('start')
 
-    gSounds['music']:setLooping(true)
-    gSounds['music']:play()
-]]
+    --gSounds['music']:setLooping(true)
+    --gSounds['music']:play()
+
     love.keyboard.keysPressed = {}
 end
 
@@ -45,7 +45,7 @@ end
 
 function love.update(dt)
     Timer.update(dt)
-    --gStateMachine:update(dt)
+    gStateMachine:update(dt)
 
     love.keyboard.keysPressed = {}
 end

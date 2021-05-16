@@ -5,8 +5,7 @@ function StartState:update(dt)
         love.event.quit()
     end
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
-        --gStateMachine:change('play')
-        print('play')
+        gStateMachine:change('play')
     end
 end
 

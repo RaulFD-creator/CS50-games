@@ -10,6 +10,7 @@ require 'src/Util'
 require 'src/Constants'
 require 'src/states/BaseState'
 require 'src/states/StartState'
+require 'src/states/PlayState'
 require 'src/StateMachine'
 
 -- Loading main assets
@@ -23,7 +24,7 @@ gFonts = {
 -- Loading main Textures
 gTextures = {
     ['backgrounds'] =  {
-        ['1'] = love.graphics.newImage('graphics/background.png'),
-        ['2'] = love.graphics.newImage('graphics/background2.jpg')
+        ['2'] = love.graphics.newImage('graphics/background.png'),
+        ['1'] = love.graphics.newImage('graphics/background2.jpg')
     }
 }

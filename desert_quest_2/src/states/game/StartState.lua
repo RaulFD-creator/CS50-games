@@ -1,13 +1,19 @@
 StartState = Class{__includes = BaseState}
 
+function StartState:init()
+    gSounds['music']['title']:setLooping(true)
+    gSounds['music']['title']:play()
+end
+
 function StartState:update(dt)
+    if love.keyboard.wasPressed('escape') then
+        love.event.quit()
+    end
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
-        gStateMachine:change('play', {
-            score = 0,
-            width = 100
-        })
+        gStateMachine:change('play')
     end
 end
+
 
 function StartState:render()
     love.graphics.draw(gTextures['backgrounds']['1'], 0, 0, 0, 

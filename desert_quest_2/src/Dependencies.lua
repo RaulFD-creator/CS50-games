@@ -65,7 +65,10 @@ gFonts = {
 gSounds = {
     ['jump'] = love.audio.newSource('sounds/jump.wav', 'static'),
     ['death'] = love.audio.newSource('sounds/death.wav', 'static'),
-    ['music'] = love.audio.newSource('sounds/music.wav', 'static'),
+    ['music'] = {
+        ['title'] = love.audio.newSource('sounds/Music/title_music.wav', 'static'),
+        ['play'] = love.audio.newSource('sounds/Music/play_music.wav', 'static')
+        },
     ['powerup-reveal'] = love.audio.newSource('sounds/powerup-reveal.wav', 'static'),
     ['pickup'] = love.audio.newSource('sounds/pickup.wav', 'static'),
     ['empty-block'] = love.audio.newSource('sounds/empty-block.wav', 'static'),

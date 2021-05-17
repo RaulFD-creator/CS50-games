@@ -104,7 +104,7 @@ gFrames = {
     ['gems'] = GenerateQuads(gTextures['gems'], 16, 16),
     ['backgrounds'] = {
         ['1'] = GenerateQuads(gTextures['backgrounds']['1'], 1600, 1062),
-        ['2'] = GenerateQuads(gTextures['backgrounds']['2'], 2127, 293)
+        ['2'] = GenerateQuads(gTextures['backgrounds']['2'], 1341, 277)
         },
     ['green-alien'] = GenerateQuads(gTextures['green-alien'], 16, 20),
     ['creatures'] = GenerateQuads(gTextures['creatures'], 16, 16),

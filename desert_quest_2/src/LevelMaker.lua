@@ -1,13 +1,3 @@
---[[
-    GD50
-    Super Mario Bros. Remake
-
-    -- LevelMaker Class --
-
-    Author: Colton Ogden
-    cogden@cs50.harvard.edu
-]]
-
 LevelMaker = Class{}
 
 function LevelMaker.generate(width, height)
@@ -16,11 +6,8 @@ function LevelMaker.generate(width, height)
     local objects = {}
 
     local tileID = TILE_ID_GROUND
-    
-    -- whether we should draw our tiles with toppers
-    local topper = true
+
     local tileset = math.random(20)
-    local topperset = math.random(20)
     local keyset = math.random(4)
     local blockset = 4 + keyset
     local flag_block = true
@@ -43,26 +30,26 @@ function LevelMaker.generate(width, height)
         local tileID = TILE_ID_EMPTY
         
         -- lay out the empty space
-        for y = 1, 6 do
+        for y = 1, 9 do
             table.insert(tiles[y],
-                Tile(x, y, tileID, nil, tileset, topperset))
+                Tile(x, y, tileID, tileset))
         end
 
         -- chance to just be emptiness
         if math.random(7) == 1 then
             if x == 1 or x == width - 5 then 
-                for y = 7, height do
+                for y = 10, height do
                     table.insert(tiles[y],
-                            Tile(x, y, TILE_ID_GROUND, y==7 and topper or nil, tileset, topperset))
+                            Tile(x, y, TILE_ID_GROUND, tileset))
                 end
             else
-                for y = 7, height do
+                for y = 10, height do
                     if y == 3 then 
                         table.insert(tiles[y],
-                            Tile(x, y, tileID, topper, tileset, topperset))
+                            Tile(x, y, tileID, tileset))
                     else
                         table.insert(tiles[y],
-                            Tile(x, y, tileID, nil, tileset, topperset))    
+                            Tile(x, y, tileID, tileset))    
                     end
                 end
             end
@@ -70,54 +57,21 @@ function LevelMaker.generate(width, height)
             tileID = TILE_ID_GROUND
 
             -- height at which we would spawn a potential jump block
-            local blockHeight = 4
+            local blockHeight = 7
 
-            for y = 7, height do
+            for y = 10, height do
                 table.insert(tiles[y],
-                    Tile(x, y, tileID, y == 7 and topper or nil, tileset, topperset))
+                    Tile(x, y, tileID, tileset))
             end
 
             -- chance to generate a pillar
             if math.random(8) == 1 and x < width - 5 then
-                blockHeight = 2
-                
-                -- chance to generate bush on pillar
-                if math.random(8) == 1 and x < width - 5 then
-                    table.insert(objects,
-                        GameObject {
-                            texture = 'bushes',
-                            x = (x - 1) * TILE_SIZE,
-                            y = (4 - 1) * TILE_SIZE,
-                            width = 16,
-                            height = 16,
-                            
-                            -- select random frame from bush_ids whitelist, then random row for variance
-                            frame = BUSH_IDS[math.random(#BUSH_IDS)] + (math.random(4) - 1) * 7,
-                            collidable = false
-                        }
-                    )
-                end
+                blockHeight = 5
                 
                 -- pillar tiles
-                tiles[5][x] = Tile(x, 5, tileID, topper, tileset, topperset)
-                tiles[6][x] = Tile(x, 6, tileID, nil, tileset, topperset)
-                tiles[7][x].topper = nil
-            
-            -- chance to generate bushes
-            elseif math.random(8) == 1 and x < width - 5 then
-                table.insert(objects,
-                    GameObject {
-                        texture = 'bushes',
-                        x = (x - 1) * TILE_SIZE,
-                        y = (6 - 1) * TILE_SIZE,
-                        width = 16,
-                        height = 16,
-                        frame = BUSH_IDS[math.random(#BUSH_IDS)] + (math.random(4) - 1) * 7,
-                        collidable = false
-                    }
-                )
+                tiles[8][x] = Tile(x, 8, tileID, tileset)
+                tiles[9][x] = Tile(x, 9, tileID, tileset)
             end
-
             -- chance to spawn a block
             if math.random(10) == 1 and x < width - 5 then
                 if flag_block and count == block_lock then

@@ -11,7 +11,7 @@ function PlayState:enter(params)
     self.width = 100
     self.camX = 0
     self.camY = 0
-    self.level = LevelMaker.generate(self.width, 10)
+    self.level = LevelMaker.generate(self.width, 12)
     self.tileMap = self.level.tileMap
     self.background = math.random(3)
     self.backgroundX = 0
@@ -57,12 +57,11 @@ end
 
 function PlayState:render()
     love.graphics.push()
-    love.graphics.draw(gTextures['backgrounds']['2'], gFrames['backgrounds']['2'][1], math.floor(-self.backgroundX), 0)
+   -- love.graphics.draw(gTextures['backgrounds']['2'], gFrames['backgrounds']['2'][1], math.floor(-self.backgroundX) -300, 0)
+
     love.graphics.draw(gTextures['backgrounds']['2'], gFrames['backgrounds']['2'][1], math.floor(-self.backgroundX),
-        gTextures['backgrounds']['2']:getHeight(), 0, 1, 1)
-    love.graphics.draw(gTextures['backgrounds']['2'], gFrames['backgrounds']['2'][1], math.floor(-self.backgroundX + 2127), 0)
-    love.graphics.draw(gTextures['backgrounds']['2'], gFrames['backgrounds']['2'][1], math.floor(-self.backgroundX + 2127),
-        gTextures['backgrounds']['2']:getHeight(), 0, 1, 1)
+       VIRTUAL_HEIGHT / gTextures['backgrounds']['1']:getHeight(), 0, 1, 1)
+
 
     love.graphics.translate(-math.floor(self.camX), -math.floor(self.camY))
     
@@ -84,7 +83,7 @@ function PlayState:updateCamera()
         math.min(TILE_SIZE * self.tileMap.width - VIRTUAL_WIDTH,
         self.player.x - (VIRTUAL_WIDTH / 2 - 8)))
 
-    self.backgroundX = (self.camX / 3) % 256
+    self.backgroundX = (self.camX / 3) % 1341
 end
 
 function PlayState:spawnEnemies()

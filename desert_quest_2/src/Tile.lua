@@ -8,7 +8,7 @@
 
 Tile = Class{}
 
-function Tile:init(x, y, id, topper, tileset, topperset)
+function Tile:init(x, y, id, tileset)
     self.x = x
     self.y = y
 
@@ -17,8 +17,6 @@ function Tile:init(x, y, id, topper, tileset, topperset)
 
     self.id = id
     self.tileset = tileset
-    self.topper = topper
-    self.topperset = topperset
 end
 
 --[[
@@ -37,10 +35,4 @@ end
 function Tile:render()
     love.graphics.draw(gTextures['tiles'], gFrames['tilesets'][self.tileset][self.id],
         (self.x - 1) * TILE_SIZE, (self.y - 1) * TILE_SIZE)
-    
-    -- tile top layer for graphical variety
-    if self.topper then
-        love.graphics.draw(gTextures['toppers'], gFrames['toppersets'][self.topperset][self.id],
-            (self.x - 1) * TILE_SIZE, (self.y - 1) * TILE_SIZE)
-    end
 end

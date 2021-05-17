@@ -53,6 +53,14 @@ require 'src/Snail'
 require 'src/Tile'
 require 'src/TileMap'
 
+-- Loading Fonts
+gFonts = {
+    ['small'] = love.graphics.newFont('fonts/font.ttf', 8),
+    ['medium'] = love.graphics.newFont('fonts/font.ttf', 16),
+    ['large'] = love.graphics.newFont('fonts/font.ttf', 44),
+    ['huge'] = love.graphics.newFont('fonts/font.ttf', 70)
+}
+
 
 gSounds = {
     ['jump'] = love.audio.newSource('sounds/jump.wav', 'static'),
@@ -71,7 +79,10 @@ gTextures = {
     ['bushes'] = love.graphics.newImage('graphics/bushes_and_cacti.png'),
     ['jump-blocks'] = love.graphics.newImage('graphics/jump_blocks.png'),
     ['gems'] = love.graphics.newImage('graphics/gems.png'),
-    ['backgrounds'] = love.graphics.newImage('graphics/backgrounds.png'),
+    ['backgrounds'] = {
+        ['1'] = love.graphics.newImage('graphics/backgrounds/background.jpg'),
+        ['2'] = love.graphics.newImage('graphics/backgrounds/background2.png')
+        },
     ['green-alien'] = love.graphics.newImage('graphics/green_alien.png'),
     ['creatures'] = love.graphics.newImage('graphics/creatures.png'),
     ['locks_and_keys'] = love.graphics.newImage('graphics/keys_and_locks.png'),
@@ -88,7 +99,10 @@ gFrames = {
     ['bushes'] = GenerateQuads(gTextures['bushes'], 16, 16),
     ['jump-blocks'] = GenerateQuads(gTextures['jump-blocks'], 16, 16),
     ['gems'] = GenerateQuads(gTextures['gems'], 16, 16),
-    ['backgrounds'] = GenerateQuads(gTextures['backgrounds'], 256, 128),
+    ['backgrounds'] = {
+        ['1'] = GenerateQuads(gTextures['backgrounds']['1'], 1600, 1062),
+        ['2'] = GenerateQuads(gTextures['backgrounds']['2'], 2127, 293)
+        },
     ['green-alien'] = GenerateQuads(gTextures['green-alien'], 16, 20),
     ['creatures'] = GenerateQuads(gTextures['creatures'], 16, 16),
     ['locks_and_keys'] = GenerateQuads(gTextures['locks_and_keys'], 16, 16),
@@ -102,10 +116,3 @@ gFrames['tilesets'] = GenerateTileSets(gFrames['tiles'],
 
 gFrames['toppersets'] = GenerateTileSets(gFrames['toppers'], 
     TOPPER_SETS_WIDE, TOPPER_SETS_TALL, TILE_SET_WIDTH, TILE_SET_HEIGHT)
-
-gFonts = {
-    ['small'] = love.graphics.newFont('fonts/font.ttf', 8),
-    ['medium'] = love.graphics.newFont('fonts/font.ttf', 16),
-    ['large'] = love.graphics.newFont('fonts/font.ttf', 32),
-    ['title'] = love.graphics.newFont('fonts/ArcadeAlternate.ttf', 32)
-}

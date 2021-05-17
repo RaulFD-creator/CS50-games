@@ -65,12 +65,12 @@ end
 
 function PlayState:render()
     love.graphics.push()
-    love.graphics.draw(gTextures['backgrounds'], gFrames['backgrounds'][self.background], math.floor(-self.backgroundX), 0)
-    love.graphics.draw(gTextures['backgrounds'], gFrames['backgrounds'][self.background], math.floor(-self.backgroundX),
-        gTextures['backgrounds']:getHeight() / 3 * 2, 0, 1, -1)
-    love.graphics.draw(gTextures['backgrounds'], gFrames['backgrounds'][self.background], math.floor(-self.backgroundX + 256), 0)
-    love.graphics.draw(gTextures['backgrounds'], gFrames['backgrounds'][self.background], math.floor(-self.backgroundX + 256),
-        gTextures['backgrounds']:getHeight() / 3 * 2, 0, 1, -1)
+    love.graphics.draw(gTextures['backgrounds']['2'], gFrames['backgrounds']['2'][1], math.floor(-self.backgroundX), 0)
+    love.graphics.draw(gTextures['backgrounds']['2'], gFrames['backgrounds']['2'][1], math.floor(-self.backgroundX),
+        gTextures['backgrounds']['2']:getHeight(), 0, 1, 1)
+    love.graphics.draw(gTextures['backgrounds']['2'], gFrames['backgrounds']['2'][1], math.floor(-self.backgroundX + 2127), 0)
+    love.graphics.draw(gTextures['backgrounds']['2'], gFrames['backgrounds']['2'][1], math.floor(-self.backgroundX + 2127),
+        gTextures['backgrounds']['2']:getHeight(), 0, 1, 1)
     
     -- translate the entire view of the scene to emulate a camera
     love.graphics.translate(-math.floor(self.camX), -math.floor(self.camY))

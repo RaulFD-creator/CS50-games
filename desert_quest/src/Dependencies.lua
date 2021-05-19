@@ -48,7 +48,7 @@ gTextures = {
 gFrames = {
     ['character-animations'] = GenerateQuads(gTextures['character'], 224, 112),
     ['tileset'] = GenerateQuads(gTextures['tiles'], 64, 50),
-    ['background'] = GenerateQuads(gTextures['backgrounds']['2'], 2127, 293)
+    ['background'] = GenerateQuads(gTextures['backgrounds']['2'], 1341, 277)
 }
 
 gSounds = {

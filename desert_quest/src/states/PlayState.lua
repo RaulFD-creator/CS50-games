@@ -16,18 +16,21 @@ function PlayState:update(dt)
     if love.keyboard.wasPressed('escape') then
         love.event.quit()
     end
-    if love.keyboard.wasPressed('right') or love.keyboard.wasPressed('d') then
+    if love.keyboard.isDown('right') or love.keyboard.isDown('d') then
         self.camX = self.camX + 10
-    elseif love.keyboard.wasPressed('left') or love.keyboard.wasPressed('a') then
+    elseif love.keyboard.isDown('left') or love.keyboard.isDown('a') then
         self.camX = self.camX - 10
     end
-    self.backgroundX = (self.camX / 3) % 256
+    self.backgroundX = (self.camX / 3) % 1341
 end
 
 function PlayState:render()
     love.graphics.push()
     love.graphics.draw(gTextures['backgrounds']['2'], gFrames['background'][1], math.floor(-self.backgroundX), 0)
     love.graphics.draw(gTextures['backgrounds']['2'], gFrames['background'][1], math.floor(-self.backgroundX),
+        gTextures['backgrounds']['2']:getHeight(), 0, 1, 1)
+    love.graphics.draw(gTextures['backgrounds']['2'], gFrames['background'][1], math.floor(-self.backgroundX + 1336), 0)
+    love.graphics.draw(gTextures['backgrounds']['2'], gFrames['background'][1], math.floor(-self.backgroundX + 1336),
         gTextures['backgrounds']['2']:getHeight(), 0, 1, 1)
     love.graphics.translate(-math.floor(self.camX), -math.floor(self.camY))
     love.graphics.pop()

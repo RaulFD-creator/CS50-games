@@ -1,121 +1,60 @@
---[[
-    GD50
-    Super Mario Bros. Remake
-
-    Author: Colton Ogden
-    cogden@cs50.harvard.edu
-
-    -- Dependencies --
-
-    A file to organize all of the global dependencies for our project, as
-    well as the assets for our game, rather than pollute our main.lua file.
-]]
-
---
--- libraries
---
+-- Calling main libraries
 Class = require 'lib/class'
+Event = require 'lib/knife.event'
 push = require 'lib/push'
 Timer = require 'lib/knife.timer'
 
---
--- our own code
---
-
--- utility
-require 'src/constants'
-require 'src/StateMachine'
+-- Loading main functions
 require 'src/Util'
+require 'src/Constants'
 
--- game states
+-- Loading Play States
 require 'src/states/BaseState'
-require 'src/states/game/PlayState'
-require 'src/states/game/StartState'
+require 'src/states/StartState'
+require 'src/states/PlayState'
+require 'src/StateMachine'
 
--- entity states
-require 'src/states/entity/PlayerFallingState'
-require 'src/states/entity/PlayerIdleState'
-require 'src/states/entity/PlayerJumpState'
-require 'src/states/entity/PlayerWalkingState'
+-- Loading Classes
+require 'src/classes/Entity'
+require 'src/classes/Player'
+require 'src/classes/GameLevel'
+require 'src/classes/GameObject'
+require 'src/classes/Hitbox'
+require 'src/classes/Tile'
+require 'src/classes/TileMap'
+require 'src/classes/LevelMaker'
 
-require 'src/states/entity/snail/SnailChasingState'
-require 'src/states/entity/snail/SnailIdleState'
-require 'src/states/entity/snail/SnailMovingState'
-
--- general
-require 'src/Animation'
-require 'src/Entity'
-require 'src/GameObject'
-require 'src/GameLevel'
-require 'src/LevelMaker'
-require 'src/Player'
-require 'src/Snail'
-require 'src/Tile'
-require 'src/TileMap'
+-- Loading Definitions
+require 'src/data/entity_defs'
 
 -- Loading Fonts
 gFonts = {
     ['small'] = love.graphics.newFont('fonts/font.ttf', 8),
     ['medium'] = love.graphics.newFont('fonts/font.ttf', 16),
     ['large'] = love.graphics.newFont('fonts/font.ttf', 44),
-    ['huge'] = love.graphics.newFont('fonts/font.ttf', 70)
+    ['huge'] = love.graphics.newFont('fonts/font.ttf', 80)
 }
 
-
-gSounds = {
-    ['jump'] = love.audio.newSource('sounds/jump.wav', 'static'),
-    ['death'] = love.audio.newSource('sounds/death.wav', 'static'),
-    ['music'] = {
-        ['title'] = love.audio.newSource('sounds/Music/title_music.wav', 'static'),
-        ['play'] = love.audio.newSource('sounds/Music/play_music.wav', 'static')
-        },
-    ['powerup-reveal'] = love.audio.newSource('sounds/powerup-reveal.wav', 'static'),
-    ['pickup'] = love.audio.newSource('sounds/pickup.wav', 'static'),
-    ['empty-block'] = love.audio.newSource('sounds/empty-block.wav', 'static'),
-    ['kill'] = love.audio.newSource('sounds/kill.wav', 'static'),
-    ['kill2'] = love.audio.newSource('sounds/kill2.wav', 'static')
-}
-
+-- Loading Textures
 gTextures = {
-    ['tiles'] = love.graphics.newImage('graphics/tiles.png'),
-    ['toppers'] = love.graphics.newImage('graphics/tile_tops.png'),
-    ['bushes'] = love.graphics.newImage('graphics/bushes_and_cacti.png'),
-    ['jump-blocks'] = love.graphics.newImage('graphics/jump_blocks.png'),
-    ['gems'] = love.graphics.newImage('graphics/gems.png'),
-    ['backgrounds'] = {
+    ['backgrounds'] =  {
         ['1'] = love.graphics.newImage('graphics/backgrounds/background.jpg'),
         ['2'] = love.graphics.newImage('graphics/backgrounds/background2.png')
-        },
-    ['green-alien'] = love.graphics.newImage('graphics/green_alien.png'),
-    ['creatures'] = love.graphics.newImage('graphics/creatures.png'),
-    ['locks_and_keys'] = love.graphics.newImage('graphics/keys_and_locks.png'),
-    ['flag_poles'] = love.graphics.newImage('graphics/flags.png'),
-    ['flags'] = love.graphics.newImage('graphics/flags.png')
-    
+    },
+    ['character'] = love.graphics.newImage('graphics/character/character_sprite.png'),
+    ['tiles'] = love.graphics.newImage('graphics/Tiles.png')
 }
 
 gFrames = {
-    ['tiles'] = GenerateQuads(gTextures['tiles'], TILE_SIZE, TILE_SIZE),
-    
-    ['toppers'] = GenerateQuads(gTextures['toppers'], TILE_SIZE, TILE_SIZE),
-    
-    ['bushes'] = GenerateQuads(gTextures['bushes'], 16, 16),
-    ['jump-blocks'] = GenerateQuads(gTextures['jump-blocks'], 16, 16),
-    ['gems'] = GenerateQuads(gTextures['gems'], 16, 16),
-    ['backgrounds'] = {
-        ['1'] = GenerateQuads(gTextures['backgrounds']['1'], 1600, 1062),
-        ['2'] = GenerateQuads(gTextures['backgrounds']['2'], 1341, 277)
-        },
-    ['green-alien'] = GenerateQuads(gTextures['green-alien'], 16, 20),
-    ['creatures'] = GenerateQuads(gTextures['creatures'], 16, 16),
-    ['locks_and_keys'] = GenerateQuads(gTextures['locks_and_keys'], 16, 16),
-    ['flag_poles'] = GenerateQuads(gTextures['flag_poles'], 16, 64),
-    ['flags'] = GenerateQuads(gTextures['flags'], 16, 16)
+    ['character-animations'] = GenerateQuads(gTextures['character'], 224, 112),
+    ['tiles'] = GenerateQuads(gTextures['tiles'], 64, 64),
+    ['background'] = GenerateQuads(gTextures['backgrounds']['2'], 1341, 277)
 }
 
--- these need to be added after gFrames is initialized because they refer to gFrames from within
-gFrames['tilesets'] = GenerateTileSets(gFrames['tiles'], 
-    TILE_SETS_WIDE, TILE_SETS_TALL, TILE_SET_WIDTH, TILE_SET_HEIGHT)
+gSounds = {
+    ['musics'] = {
+        ['title_screen'] = love.audio.newSource('sounds/title_music.wav', 'static'),
+        ['play'] = love.audio.newSource('sounds/play_music.wav', 'static')
+    }
+}
 
-gFrames['toppersets'] = GenerateTileSets(gFrames['toppers'], 
-    TOPPER_SETS_WIDE, TOPPER_SETS_TALL, TILE_SET_WIDTH, TILE_SET_HEIGHT)

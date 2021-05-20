@@ -1,43 +1,27 @@
 --[[
-    GD50
-    Super Mario Bros. Remake
-
-    Author: Colton Ogden
-    cogden@cs50.harvard.edu
-    
-    A classic platformer in the style of Super Mario Bros., using a free
-    art pack. Super Mario Bros. was instrumental in the resurgence of video
-    games in the mid-80s, following the infamous crash shortly after the
-    Atari age of the late 70s. The goal is to navigate various levels from
-    a side perspective, where jumping onto enemies inflicts damage and
-    jumping up into blocks typically breaks them or reveals a powerup.
-
-    Art pack:
-    https://opengameart.org/content/kenney-16x16
-
-    Music:
-    https://freesound.org/people/Sirkoto51/sounds/393818/
+    Desert Quest by Raúl Fernández Díaz
+    Final project for CS50's Introduction to Game Development
 ]]
 
-love.graphics.setDefaultFilter('nearest', 'nearest')
 require 'src/Dependencies'
 
 function love.load()
-    love.graphics.setFont(gFonts['medium'])
-    love.window.setTitle('Super 50 Bros.')
-
     math.randomseed(os.time())
-    
+    love.window.setTitle('Desert Quest')
+    love.graphics.setDefaultFilter('nearest', 'nearest')
+
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         fullscreen = false,
         vsync = true,
-        resizable = true,
-        canvas = false
+        resizable = true
     })
+
+    love.graphics.setFont(gFonts['small'])
 
     gStateMachine = StateMachine {
         ['start'] = function() return StartState() end,
-        ['play'] = function() return PlayState() end
+        ['play'] = function() return PlayState() end,
+       -- ['game-over'] = function() return GameOverState() end
     }
     gStateMachine:change('start')
 
@@ -49,10 +33,6 @@ function love.resize(w, h)
 end
 
 function love.keypressed(key)
-    if key == 'escape' then
-        love.event.quit()
-    end
-
     love.keyboard.keysPressed[key] = true
 end
 
@@ -61,6 +41,7 @@ function love.keyboard.wasPressed(key)
 end
 
 function love.update(dt)
+    Timer.update(dt)
     gStateMachine:update(dt)
 
     love.keyboard.keysPressed = {}

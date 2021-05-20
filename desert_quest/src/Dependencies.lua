@@ -47,7 +47,7 @@ gTextures = {
 
 gFrames = {
     ['character-animations'] = GenerateQuads(gTextures['character'], 224, 112),
-    ['tileset'] = GenerateQuads(gTextures['tiles'], 64, 50),
+    ['tiles'] = GenerateQuads(gTextures['tiles'], 64, 64),
     ['background'] = GenerateQuads(gTextures['backgrounds']['2'], 1341, 277)
 }
 
@@ -57,3 +57,4 @@ gSounds = {
         ['play'] = love.audio.newSource('sounds/play_music.wav', 'static')
     }
 }
+

@@ -34,4 +34,5 @@ function PlayState:render()
         gTextures['backgrounds']['2']:getHeight(), 0, 1, 1)
     love.graphics.translate(-math.floor(self.camX), -math.floor(self.camY))
     love.graphics.pop()
+    love.graphics.draw(gTextures['tiles'], gFrames['tiles'][1], 30, 30)
 end

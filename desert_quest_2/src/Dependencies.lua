@@ -9,25 +9,18 @@ require 'src/Util'
 require 'src/Constants'
 
 -- Loading Play States
+require 'src/StateMachine'
 require 'src/states/BaseState'
 require 'src/states/StartState'
-require 'src/states/PlayState'
-require 'src/StateMachine'
 
 -- Loading Classes
-require 'src/classes/Entity'
-require 'src/classes/Player'
-require 'src/classes/GameLevel'
-require 'src/classes/GameObject'
-require 'src/classes/Hitbox'
-require 'src/classes/Tile'
-require 'src/classes/TileMap'
-require 'src/classes/LevelMaker'
+
 
 -- Loading Definitions
-require 'src/data/entity_defs'
+
 
 -- Loading Fonts
+
 gFonts = {
     ['small'] = love.graphics.newFont('fonts/font.ttf', 8),
     ['medium'] = love.graphics.newFont('fonts/font.ttf', 16),
@@ -42,12 +35,10 @@ gTextures = {
         ['2'] = love.graphics.newImage('graphics/backgrounds/background2.png')
     },
     ['character'] = love.graphics.newImage('graphics/character/character_sprite.png'),
-    ['tiles'] = love.graphics.newImage('graphics/Tiles.png')
 }
 
 gFrames = {
     ['character-animations'] = GenerateQuads(gTextures['character'], 224, 112),
-    ['tiles'] = GenerateQuads(gTextures['tiles'], 64, 64),
     ['background'] = GenerateQuads(gTextures['backgrounds']['2'], 1341, 277)
 }
 
